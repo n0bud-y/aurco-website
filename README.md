@@ -72,6 +72,7 @@ covers the change.
 | FAQs | Questions and answers |
 | Blog posts | Titles, cover photos, dates, links |
 | Site content | All remaining text and images: hero, about, why-choose-us, call to action, contact details, footer links, inner page banners |
+| Arabic text | The Arabic version of every piece of content above. Empty entries fall back to English |
 | Messages | Everything sent through the contact form |
 
 Categories are free text: whatever you type becomes a filter button on the site.
@@ -82,6 +83,20 @@ Categories are free text: whatever you type becomes a filter button on the site.
 is a tab, each entry an input (`text`, `textarea`, `lines`, `pairs`, `image`,
 `select`). Add a field there, then read it in `app/Support/SiteContent.php` so React
 receives it. No migration needed: content is stored in a JSON column.
+
+## Arabic version
+
+The ENG / AR switch in the header changes the whole site to Arabic, right to left, using
+IBM Plex Sans Arabic. Any page also opens in Arabic with `?lang=ar` (for example `/about?lang=ar`).
+
+- **CRM content** is translated on the server by `app/Support/Translator.php`, using the
+  `translations` table. Edit it under **Arabic text** in the CRM. The English text is the key, so
+  when English changes, its Arabic shows up as missing until it is updated.
+- **Fixed interface text** (buttons, form labels, headings written in the components) lives in
+  `resources/js/lang/ar.js` and is read through `useT()` from `resources/js/lib/i18n.js`.
+- **Right-to-left fixes** are in `resources/js/styles/rtl.css`.
+- The shipped Arabic is in `database/seeders/data/translations-ar.json` and is loaded by
+  `TranslationSeeder` (it never overwrites Arabic already edited in the CRM).
 
 ## Notes
 

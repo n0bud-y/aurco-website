@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Support\SiteContent;
+use App\Support\Translator;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -16,8 +17,11 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $locale = app()->getLocale();
+
         return array_merge(parent::share($request), [
-            'content' => fn () => SiteContent::payload(),
+            'locale' => $locale,
+            'content' => fn () => Translator::translate(SiteContent::payload(), $locale),
             'flash' => [
                 'status' => fn () => $request->session()->get('status'),
             ],

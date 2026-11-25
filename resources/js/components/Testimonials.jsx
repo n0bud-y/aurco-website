@@ -1,9 +1,11 @@
 import { useContent } from '../content/useContent'
 import SectionHeading from './ui/SectionHeading'
 import { Star } from './ui/Icons'
+import { useT } from '../lib/i18n'
 import './Testimonials.css'
 
 export default function Testimonials() {
+  const t = useT()
   const { testimonials } = useContent()
 
   return (
@@ -14,7 +16,7 @@ export default function Testimonials() {
           {testimonials.items.map((item, i) => (
             <figure className="testimonial" key={item.name} data-reveal="up" data-reveal-delay={i * 90}>
               {item.rating > 0 && (
-                <div className="testimonial__stars" role="img" aria-label={`Rated ${item.rating} out of 5`}>
+                <div className="testimonial__stars" role="img" aria-label={t('Rated {rating} out of 5', { rating: item.rating })}>
                   {Array.from({ length: item.rating }, (_, i) => <Star key={i} />)}
                 </div>
               )}

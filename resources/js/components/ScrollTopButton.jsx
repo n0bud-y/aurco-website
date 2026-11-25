@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
 import { ArrowUp } from './ui/Icons'
 import './ScrollTopButton.css'
+import { useT } from '../lib/i18n'
 
 const RADIUS = 26
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS
 
 /** Back-to-top control with a ring that tracks reading progress. */
 export default function ScrollTopButton() {
+  const t = useT()
   const [progress, setProgress] = useState(0)
   const [visible, setVisible] = useState(false)
 
@@ -42,7 +44,7 @@ export default function ScrollTopButton() {
       className={`scroll-top${visible ? ' is-visible' : ''}`}
       onClick={backToTop}
       inert={!visible}
-      aria-label="Back to top"
+      aria-label={t("Back to top")}
     >
       <svg className="scroll-top__ring" viewBox="0 0 60 60" aria-hidden="true">
         <circle className="scroll-top__track" cx="30" cy="30" r={RADIUS} />

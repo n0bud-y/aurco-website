@@ -8,8 +8,10 @@ import FilterBar from '../components/ui/FilterBar'
 import { MapPin } from '../components/ui/Icons'
 import '../styles/inner.css'
 import './Projects.css'
+import { useT } from '../lib/i18n'
 
 function ProjectCard({ item, revealDelay }) {
+  const t = useT()
   const facts = [
     ['Client', item.client],
     ['Year', item.year],
@@ -30,7 +32,7 @@ function ProjectCard({ item, revealDelay }) {
         {facts.length > 0 && (
           <dl className="project-card__facts">
             {facts.map(([label, value]) => (
-              <div key={label}><dt>{label}</dt><dd>{value}</dd></div>
+              <div key={label}><dt>{t(label)}</dt><dd>{value}</dd></div>
             ))}
           </dl>
         )}
@@ -40,6 +42,7 @@ function ProjectCard({ item, revealDelay }) {
 }
 
 function TrackRecord({ sections }) {
+  const t = useT()
   const [active, setActive] = useState(sections[0]?.label)
   const section = sections.find((s) => s.label === active) ?? sections[0]
   if (!section) return null
@@ -50,33 +53,33 @@ function TrackRecord({ sections }) {
       <div className="container">
         <SectionHeading
           id="track-title"
-          eyebrow="Track record"
-          title="Notable completed & ongoing work"
-          text="A wider list of construction, temporary facilities, facility management and equipment rental contracts. Values are approximate."
+          eyebrow={t("Track record")}
+          title={t("Notable completed & ongoing work")}
+          text={t("A wider list of construction, temporary facilities, facility management and equipment rental contracts. Values are approximate.")}
         />
-        <FilterBar options={sections.map((s) => s.label)} value={section.label} onChange={setActive} label="Choose a track record table" />
+        <FilterBar options={sections.map((s) => s.label)} value={section.label} onChange={setActive} label={t("Choose a track record table")} />
         <div className="data-table-wrap">
           <table className="data-table data-table--stack">
             <caption className="visually-hidden">{section.label}</caption>
             <thead>
               <tr>
-                <th scope="col">Project</th>
-                <th scope="col">Client</th>
-                <th scope="col">Location</th>
-                <th scope="col">Scope</th>
-                <th scope="col">Year</th>
-                {showValue && <th scope="col">Value (approx.)</th>}
+                <th scope="col">{t("Project")}</th>
+                <th scope="col">{t("Client")}</th>
+                <th scope="col">{t("Location")}</th>
+                <th scope="col">{t("Scope")}</th>
+                <th scope="col">{t("Year")}</th>
+                {showValue && <th scope="col">{t("Value (approx.)")}</th>}
               </tr>
             </thead>
             <tbody>
               {section.rows.map((row, i) => (
                 <tr key={`${row.title}-${i}`}>
                   <td className="data-table__title">{row.title}</td>
-                  <td data-label="Client">{row.client}</td>
-                  <td data-label="Location">{row.location}</td>
-                  <td data-label="Scope">{row.scope}</td>
-                  <td data-label="Year" className="data-table__num">{row.year}</td>
-                  {showValue && <td data-label="Value" className="data-table__value">{row.value ?? '—'}</td>}
+                  <td data-label={t("Client")}>{row.client}</td>
+                  <td data-label={t("Location")}>{row.location}</td>
+                  <td data-label={t("Scope")}>{row.scope}</td>
+                  <td data-label={t("Year")} className="data-table__num">{row.year}</td>
+                  {showValue && <td data-label={t("Value")} className="data-table__value">{row.value ?? '—'}</td>}
                 </tr>
               ))}
             </tbody>
@@ -88,6 +91,7 @@ function TrackRecord({ sections }) {
 }
 
 export default function Projects() {
+  const t = useT()
   const { projectsPage } = useContent()
   const [filter, setFilter] = useState('All')
   const items = filter === 'All'
@@ -96,8 +100,8 @@ export default function Projects() {
 
   return (
     <>
-      <Head title="Projects" />
-      <PageHero title={projectsPage.hero.title} text={projectsPage.hero.text} crumb="Projects" />
+      <Head title={t("Projects")} />
+      <PageHero title={projectsPage.hero.title} text={projectsPage.hero.text} crumb={t("Projects")} />
 
       <section className="portfolio section" aria-labelledby="portfolio-title">
         <div className="container">
@@ -107,8 +111,8 @@ export default function Projects() {
             title={projectsPage.title}
             text={projectsPage.text}
           />
-          <FilterBar options={projectsPage.filters} value={filter} onChange={setFilter} label="Filter projects by type" />
-          <p className="visually-hidden" role="status">{`${items.length} projects shown`}</p>
+          <FilterBar options={projectsPage.filters} value={filter} onChange={setFilter} label={t("Filter projects by type")} />
+          <p className="visually-hidden" role="status">{t('{count} projects shown', { count: items.length })}</p>
           <ul className="portfolio__grid">
             {items.map((item, i) => (
               <li key={item.title}>

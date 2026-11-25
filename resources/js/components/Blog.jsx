@@ -2,9 +2,11 @@ import { useContent } from '../content/useContent'
 import SectionHeading from './ui/SectionHeading'
 import { ArrowCircleFilled } from './ui/Icons'
 import SmartLink from './ui/SmartLink'
+import { useT } from '../lib/i18n'
 import './Blog.css'
 
 export default function Blog() {
+  const t = useT()
   const { blog } = useContent()
 
   return (
@@ -19,7 +21,7 @@ export default function Blog() {
                 <h3 className="post-card__title">{post.title}</h3>
                 {post.excerpt && <p className="post-card__excerpt">{post.excerpt}</p>}
                 <SmartLink className="post-card__more" href={post.href}>
-                  Read more<span className="visually-hidden">: {post.title}</span>
+                  {t('Read more')}<span className="visually-hidden">: {post.title}</span>
                   <ArrowCircleFilled />
                 </SmartLink>
               </div>

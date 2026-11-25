@@ -6,9 +6,11 @@ import fallbackLogo from '../assets/images/logo-aurco.png'
 import Button from './ui/Button'
 import NavLink from './ui/NavLink'
 import './StickyHeader.css'
+import { useT } from '../lib/i18n'
 
 /** Compact bar that slides in once the page hero has scrolled away. */
 export default function StickyHeader() {
+  const t = useT()
   const [visible, setVisible] = useState(false)
   const { company } = useContent()
 
@@ -33,14 +35,14 @@ export default function StickyHeader() {
         <Link className="sticky-header__logo" href="/">
           <img src={company.logo || fallbackLogo} alt={company.name} width="170" height="46" />
         </Link>
-        <nav aria-label="Main (sticky)">
+        <nav aria-label={t("Main (sticky)")}>
           <ul className="site-nav__list">
             {navLinks.map((link) => (
               <li key={link.label}><NavLink link={link} className="site-nav__link" /></li>
             ))}
           </ul>
         </nav>
-        <Button to="/contact">Contact Us</Button>
+        <Button to="/contact">{t("Contact Us")}</Button>
       </div>
     </div>
   )

@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 import { ArrowRightLong, CloseIcon } from './ui/Icons'
 import './Lightbox.css'
+import { useT } from '../lib/i18n'
 
 // The bundled photos come from the design mockup, so they are capped at a gentle
 // upscale. Raise this once you swap in the full-resolution originals.
 const MAX_UPSCALE = 1.6
 
 export default function Lightbox({ items, index, onClose, onNavigate }) {
+  const t = useT()
   const dialogRef = useRef(null)
   const [size, setSize] = useState(null)
   const open = index >= 0 && index < items.length
@@ -31,21 +33,21 @@ export default function Lightbox({ items, index, onClose, onNavigate }) {
     <dialog
       className="lightbox"
       ref={dialogRef}
-      aria-label="Photo viewer"
+      aria-label={t("Photo viewer")}
       onClose={onClose}
       onKeyDown={handleKeyDown}
       onClick={(event) => { if (event.target === event.currentTarget) onClose() }}
     >
       <button type="button" className="lightbox__close" onClick={onClose}>
-        <CloseIcon /><span className="visually-hidden">Close</span>
+        <CloseIcon /><span className="visually-hidden">{t("Close")}</span>
       </button>
       {items.length > 1 && (
         <>
           <button type="button" className="lightbox__nav lightbox__nav--prev" onClick={() => go(-1)}>
-            <ArrowRightLong /><span className="visually-hidden">Previous photo</span>
+            <ArrowRightLong /><span className="visually-hidden">{t("Previous photo")}</span>
           </button>
           <button type="button" className="lightbox__nav lightbox__nav--next" onClick={() => go(1)}>
-            <ArrowRightLong /><span className="visually-hidden">Next photo</span>
+            <ArrowRightLong /><span className="visually-hidden">{t("Next photo")}</span>
           </button>
         </>
       )}

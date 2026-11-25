@@ -6,8 +6,10 @@ import SectionHeading from '../components/ui/SectionHeading'
 import Button from '../components/ui/Button'
 import '../styles/inner.css'
 import './Services.css'
+import { useT } from '../lib/i18n'
 
 function ServiceBlock({ item, index }) {
+  const t = useT()
   const titled = item.groups.filter((g) => g.title)
   const loose = item.groups.filter((g) => !g.title).flatMap((g) => g.items)
 
@@ -19,7 +21,7 @@ function ServiceBlock({ item, index }) {
           <h2 className="heading-2" id={`${item.id}-title`}>{item.title}</h2>
           {item.summary && <p className="lead">{item.summary}</p>}
           {loose.length > 0 && <ul className="tick-list service-block__loose">{loose.map((t) => <li key={t}>{t}</li>)}</ul>}
-          <div className="service-block__cta"><Button to="/contact" icon>Request a Quote</Button></div>
+          <div className="service-block__cta"><Button to="/contact" icon>{t("Request a Quote")}</Button></div>
         </div>
         {item.image && (
           <div className="split__media service-block__media" data-reveal={index % 2 ? 'left' : 'right'}>
@@ -44,17 +46,18 @@ function ServiceBlock({ item, index }) {
 }
 
 export default function Services() {
+  const t = useT()
   const { servicesPage: page } = useContent()
 
   return (
     <>
-      <Head title="Services" />
-      <PageHero title={page.hero.title} text={page.hero.text} crumb="Services" />
+      <Head title={t("Services")} />
+      <PageHero title={page.hero.title} text={page.hero.text} crumb={t("Services")} />
 
       <section className="section services-intro" aria-labelledby="services-intro-title">
         <div className="container">
           <SectionHeading id="services-intro-title" eyebrow={page.eyebrow} title={page.title} text={page.text} />
-          <nav className="services-jump" aria-label="Jump to a business line">
+          <nav className="services-jump" aria-label={t("Jump to a business line")}>
             {page.items.map((item, i) => (
               <a key={item.id} href={`#${item.id}`} className="services-jump__link" data-reveal="up" data-reveal-delay={i * 70}>
                 <span>{String(i + 1).padStart(2, '0')}</span>{item.title}
@@ -69,7 +72,7 @@ export default function Services() {
       {page.fleet.items.length > 0 && (
         <section className="section fleet" id="fleet" aria-labelledby="fleet-title">
           <div className="container">
-            <SectionHeading id="fleet-title" eyebrow="Rental equipment" title={page.fleet.title} text={page.fleet.text} />
+            <SectionHeading id="fleet-title" eyebrow={t("Rental equipment")} title={page.fleet.title} text={page.fleet.text} />
             <ul className="fleet__grid">
               {page.fleet.items.map((unit, i) => (
                 <li className="fleet__item" key={unit.name} data-reveal="up" data-reveal-delay={(i % 5) * 50}>

@@ -2,8 +2,10 @@ import { useContent } from '../content/useContent'
 import Button from './ui/Button'
 import Header from './Header'
 import './Hero.css'
+import { useT } from '../lib/i18n'
 
 export default function Hero() {
+  const t = useT()
   const { hero } = useContent()
 
   return (
@@ -16,8 +18,8 @@ export default function Hero() {
           <h1 className="hero__title" id="hero-title">{hero.title}</h1>
           <p className="hero__text">{hero.text}</p>
           <div className="hero__actions">
-            <Button to="/contact" icon>Get Started</Button>
-            <Button to="/projects" variant="outline" icon>View Projects</Button>
+            <Button to="/contact" icon>{t("Get Started")}</Button>
+            <Button to="/projects" variant="outline" icon>{t("View Projects")}</Button>
           </div>
         </div>
       </div>

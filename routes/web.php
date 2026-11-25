@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\TrackRecordController;
+use App\Http\Controllers\Admin\TranslationController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Site\SiteController;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,9 @@ Route::get('/projects', [SiteController::class, 'projects'])->name('projects');
 Route::get('/credentials', [SiteController::class, 'credentials'])->name('credentials');
 Route::get('/gallery', [SiteController::class, 'gallery'])->name('gallery');
 Route::get('/contact', [SiteController::class, 'contact'])->name('contact');
+Route::get('/locale/{locale}', [SiteController::class, 'locale'])
+    ->whereIn('locale', array_keys(\App\Support\Translator::LOCALES))
+    ->name('locale');
 Route::post('/contact', [SiteController::class, 'storeMessage'])
     ->middleware('throttle:10,1')
     ->name('contact.store');
@@ -48,6 +52,9 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::resource('testimonials', TestimonialController::class)->except('show');
     Route::resource('faqs', FaqController::class)->except('show');
     Route::resource('posts', PostController::class)->except('show');
+
+    Route::get('translations', [TranslationController::class, 'index'])->name('translations.index');
+    Route::put('translations', [TranslationController::class, 'update'])->name('translations.update');
 
     Route::get('content/{group?}', [ContentController::class, 'edit'])->name('content.edit');
     Route::put('content/{group}', [ContentController::class, 'update'])->name('content.update');

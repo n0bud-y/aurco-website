@@ -9,18 +9,24 @@ import '@fontsource/dm-sans/400.css'
 import '@fontsource/dm-sans/500.css'
 import '@fontsource/dm-sans/600.css'
 import '@fontsource/dm-sans/700.css'
+// Arabic glyphs only: the browser downloads these files only when Arabic text is on the page.
+import '@fontsource/ibm-plex-sans-arabic/400.css'
+import '@fontsource/ibm-plex-sans-arabic/500.css'
+import '@fontsource/ibm-plex-sans-arabic/600.css'
+import '@fontsource/ibm-plex-sans-arabic/700.css'
 import 'lenis/dist/lenis.css'
 import './styles/global.css'
+import './styles/rtl.css'
 import './motion/motion.css'
 import { initSmoothScroll } from './motion/smoothScroll'
 import SiteLayout from './Layouts/SiteLayout'
-import { initTranslation } from './lib/googleTranslate'
 
 initSmoothScroll()
-initTranslation()
+
+const siteName = () => (document.documentElement.lang === 'ar' ? 'أوركو للمقاولات' : 'AURCO Contracting')
 
 createInertiaApp({
-  title: (title) => (title ? `${title} | AURCO Contracting` : 'AURCO Contracting'),
+  title: (title) => (title ? `${title} | ${siteName()}` : siteName()),
   resolve: async (name) => {
     const page = await resolvePageComponent(`./Pages/${name}.jsx`, import.meta.glob('./Pages/**/*.jsx'))
 

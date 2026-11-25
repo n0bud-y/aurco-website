@@ -27,6 +27,7 @@
                     ['admin.faqs.index', 'FAQs'],
                     ['admin.posts.index', 'Blog posts'],
                     ['admin.content.edit', 'Site content'],
+                    ['admin.translations.index', 'Arabic text'],
                     ['admin.messages.index', 'Messages'],
                 ];
             @endphp

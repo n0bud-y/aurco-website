@@ -306,3 +306,19 @@ Schema      : migration 2026_11_25_000100_add_company_profile_fields.
 - Approval to publish contract values and named certificate quotes on the public site.
 - Arabic: site still relies on the Google Translate toggle (no hand-written Arabic copy).
 ================================================================================
+
+--------------------------------------------------------------------------------
+8. ARABIC VERSION (2026-11-26)
+--------------------------------------------------------------------------------
+- Replaced the Google Translate toggle with a hand-written Arabic version:
+  * ENG / AR switch reloads the site in Arabic (dir="rtl", IBM Plex Sans Arabic font).
+  * ?lang=ar on any URL opens it in Arabic (shareable link for client review).
+  * 812 content strings translated (all CRM content: pages, projects, track record, gallery,
+    FAQs, news, testimonials). Stored in the `translations` table, seeded from
+    database/seeders/data/translations-ar.json.
+  * New CRM screen "Arabic text": edit, search, and filter missing translations.
+  * ~120 fixed interface strings translated in resources/js/lang/ar.js.
+  * RTL layout fixes in resources/js/styles/rtl.css.
+- The Arabic must be reviewed by a native Arabic speaker on the client side before launch
+  (see doc/client-questions.txt, item 13).
+- Client question list written: doc/client-questions.txt.

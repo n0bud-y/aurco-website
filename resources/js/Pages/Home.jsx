@@ -11,11 +11,13 @@ import Testimonials from '../components/Testimonials'
 import Faq from '../components/Faq'
 import Blog from '../components/Blog'
 import Contact from '../components/Contact'
+import { useT } from '../lib/i18n'
 
 export default function Home() {
+  const t = useT()
   return (
     <>
-      <Head title="Construction, Equipment Rental & Facility Management in Saudi Arabia" />
+      <Head title={t("Construction, Equipment Rental & Facility Management in Saudi Arabia")} />
       <Hero />
       <About />
       <StatsStrip />

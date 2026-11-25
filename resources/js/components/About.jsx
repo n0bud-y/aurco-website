@@ -2,8 +2,10 @@ import { useContent } from '../content/useContent'
 import Button from './ui/Button'
 import { CheckCircle, PhoneRing } from './ui/Icons'
 import './About.css'
+import { useT } from '../lib/i18n'
 
 export default function About() {
+  const t = useT()
   const { about } = useContent()
 
   return (
@@ -22,7 +24,7 @@ export default function About() {
             ))}
           </ul>
           <div className="about__actions">
-            <Button to="/contact" icon>Get Free Quote</Button>
+            <Button to="/contact" icon>{t("Get Free Quote")}</Button>
             <a className="about__phone" href={about.supportPhoneHref}>
               <PhoneRing className="about__phone-icon" />
               <span>

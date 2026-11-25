@@ -2,9 +2,11 @@ import { Link } from '@inertiajs/react'
 import { useContent } from '../content/useContent'
 import Header from './Header'
 import './PageHero.css'
+import { useT } from '../lib/i18n'
 
 /** Banner used at the top of every inner page. */
 export default function PageHero({ title, text, crumb, children }) {
+  const t = useT()
   const { hero } = useContent()
 
   return (
@@ -13,9 +15,9 @@ export default function PageHero({ title, text, crumb, children }) {
         {hero.image && <img className="hero-frame__bg" src={hero.image} alt="" fetchPriority="high" />}
         <Header />
         <div className="page-hero__content">
-          <nav className="page-hero__crumbs" aria-label="Breadcrumb">
+          <nav className="page-hero__crumbs" aria-label={t("Breadcrumb")}>
             <ol>
-              <li><Link href="/">Home</Link></li>
+              <li><Link href="/">{t("Home")}</Link></li>
               <li aria-current="page">{crumb || title}</li>
             </ol>
           </nav>

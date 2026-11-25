@@ -1,9 +1,11 @@
 import { useContent } from '../content/useContent'
 import SectionHeading from './ui/SectionHeading'
+import { useT } from '../lib/i18n'
 import './Clients.css'
 
 /** Client logo wall. */
 export default function Clients() {
+  const t = useT()
   const { clients } = useContent()
   if (!clients?.image) return null
 
@@ -14,7 +16,7 @@ export default function Clients() {
         <figure className="clients__wall" data-reveal="zoom">
           <img
             src={clients.image}
-            alt={clients.names.length ? `Client logos: ${clients.names.join(', ')}` : 'Client logos'}
+            alt={clients.names.length ? t('Client logos: {names}', { names: clients.names.join('، ') }) : t('Client logos')}
             loading="lazy"
             decoding="async"
           />

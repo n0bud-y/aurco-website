@@ -4,6 +4,7 @@ import worldMap from '../assets/images/deco-worldmap.png'
 import Button from './ui/Button'
 import { MailAt, PhoneRing } from './ui/Icons'
 import './Contact.css'
+import { useT } from '../lib/i18n'
 
 const fields = [
   { name: 'name', label: 'Enter Your Name', type: 'text', autoComplete: 'name' },
@@ -13,6 +14,7 @@ const fields = [
 ]
 
 function ContactForm() {
+  const t = useT()
   const { data, setData, post, processing, errors, wasSuccessful, reset } = useForm({
     name: '', email: '', phone: '', subject: '', message: '', website: '',
   })
@@ -26,12 +28,12 @@ function ContactForm() {
     <form className="contact-form" onSubmit={handleSubmit}>
       {fields.map((field) => (
         <div className="field" key={field.name}>
-          <label className="visually-hidden" htmlFor={`contact-${field.name}`}>{field.label}</label>
+          <label className="visually-hidden" htmlFor={`contact-${field.name}`}>{t(field.label)}</label>
           <input
             id={`contact-${field.name}`}
             name={field.name}
             type={field.type}
-            placeholder={field.label}
+            placeholder={t(field.label)}
             autoComplete={field.autoComplete}
             value={data[field.name]}
             onChange={(event) => setData(field.name, event.target.value)}
@@ -43,11 +45,11 @@ function ContactForm() {
       ))}
 
       <div className="field field--full">
-        <label className="visually-hidden" htmlFor="contact-message">Message</label>
+        <label className="visually-hidden" htmlFor="contact-message">{t("Message")}</label>
         <textarea
           id="contact-message"
           name="message"
-          placeholder="Message"
+          placeholder={t("Message")}
           value={data.message}
           onChange={(event) => setData('message', event.target.value)}
           aria-invalid={Boolean(errors.message)}
@@ -58,7 +60,7 @@ function ContactForm() {
 
       {/* Hidden from people, tempting to bots. */}
       <div className="visually-hidden" aria-hidden="true">
-        <label htmlFor="contact-website">Leave this field empty</label>
+        <label htmlFor="contact-website">{t("Leave this field empty")}</label>
         <input
           id="contact-website"
           name="website"
@@ -70,23 +72,24 @@ function ContactForm() {
       </div>
 
       <Button type="submit" className="contact-form__submit" disabled={processing}>
-        {processing ? 'Sending…' : 'Submit'}
+        {processing ? t('Sending…') : t('Submit')}
       </Button>
       <p className="contact-form__status" role="status">
-        {wasSuccessful ? 'Message sent. Our team will reply within one business day.' : ''}
+        {wasSuccessful ? t('Message sent. Our team will reply within one business day.') : ''}
       </p>
     </form>
   )
 }
 
 export default function Contact() {
+  const t = useT()
   const { company, contact } = useContent()
 
   return (
     <section className="contact section section--pink" id="contact" aria-labelledby="contact-title">
       <img className="deco contact__map" src={worldMap} alt="" aria-hidden="true" data-parallax="0.05" />
       <div className="container contact__grid">
-        <aside className="contact__card" aria-label="Contact details" data-reveal="left">
+        <aside className="contact__card" aria-label={t("Contact details")} data-reveal="left">
           <PhoneRing className="contact__icon" />
           <p className="contact__label">{contact.callLabel}</p>
           <a className="contact__value" href={company.phoneHref}>{company.phone}</a>

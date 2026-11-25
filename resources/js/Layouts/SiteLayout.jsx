@@ -9,8 +9,10 @@ import ScrollTopButton from '../components/ScrollTopButton'
 import TopBar from '../components/TopBar'
 import Footer from '../components/Footer'
 import WhatsAppButton from '../components/WhatsAppButton'
+import { useT } from '../lib/i18n'
 
 export default function SiteLayout({ children }) {
+  const t = useT()
   usePageMotion()
 
   return (
@@ -20,7 +22,7 @@ export default function SiteLayout({ children }) {
       <PageCurtain />
       <Cursor />
       <ScrollProgress />
-      <a className="skip-link" href="#main">Skip to content</a>
+      <a className="skip-link" href="#main">{t("Skip to content")}</a>
       <TopBar />
       <StickyHeader />
       <main id="main">{children}</main>

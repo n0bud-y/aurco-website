@@ -46,6 +46,17 @@ class SiteController extends Controller
         return Inertia::render('Contact');
     }
 
+    /** Switches the site language and returns to the page the visitor was on. */
+    public function locale(Request $request, string $locale): RedirectResponse
+    {
+        $request->session()->put('locale', $locale);
+
+        $back = url()->previous();
+        $sameSite = str_starts_with($back, url('/')) && ! str_contains($back, '/locale/');
+
+        return redirect()->to($sameSite ? $back : url('/'));
+    }
+
     public function storeMessage(Request $request): RedirectResponse
     {
         $data = $request->validate([

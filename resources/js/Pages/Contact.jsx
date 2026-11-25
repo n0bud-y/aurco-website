@@ -6,18 +6,20 @@ import Faq from '../components/Faq'
 import SectionHeading from '../components/ui/SectionHeading'
 import { MailAt, MapPin, PhoneRing } from '../components/ui/Icons'
 import './Contact.css'
+import { useT } from '../lib/i18n'
 
 const icons = { phone: PhoneRing, mail: MailAt, map: MapPin }
 
 export default function Contact() {
+  const t = useT()
   const { company, contactPage } = useContent()
 
   return (
     <>
-      <Head title="Contact Us" />
-      <PageHero title={contactPage.hero.title} text={contactPage.hero.text} crumb="Contact" />
+      <Head title={t("Contact Us")} />
+      <PageHero title={contactPage.hero.title} text={contactPage.hero.text} crumb={t("Contact")} />
 
-      <section className="contact-info section" aria-label="How to reach us">
+      <section className="contact-info section" aria-label={t("How to reach us")}>
         <div className="container contact-info__grid">
           {contactPage.cards.map((card, i) => {
             const Icon = icons[card.icon]
@@ -39,10 +41,10 @@ export default function Contact() {
 
       <section className="contact-map section" aria-labelledby="map-title">
         <div className="container">
-          <SectionHeading id="map-title" eyebrow="Find us" title="Visit our office" text={company.address} />
+          <SectionHeading id="map-title" eyebrow={t("Find us")} title={t("Visit our office")} text={company.address} />
           <div className="contact-map__frame" data-reveal="zoom">
             <iframe
-              title="Map showing the AURCO Contracting office in Al Khobar"
+              title={t("Map showing the AURCO Contracting office in Al Khobar")}
               src={`https://www.google.com/maps?q=${encodeURIComponent(contactPage.mapQuery ?? '')}&output=embed`}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

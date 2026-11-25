@@ -1,8 +1,10 @@
 import { Link, usePage } from '@inertiajs/react'
 import { scrollToElement } from '../../motion/smoothScroll'
+import { useT } from '../../lib/i18n'
 
 /** Inertia link, or a smooth in-page scroll when the target is on this page. */
 export default function NavLink({ link, className = '', onNavigate }) {
+  const t = useT()
   const { url } = usePage()
   const [path, hash] = link.to.split('#')
   const currentPath = url.split('?')[0].split('#')[0]
@@ -21,14 +23,14 @@ export default function NavLink({ link, className = '', onNavigate }) {
           onNavigate?.()
         }}
       >
-        {link.label}
+        {t(link.label)}
       </a>
     )
   }
 
   return (
     <Link href={link.to} className={classes} aria-current={active ? 'page' : undefined} onClick={() => onNavigate?.()}>
-      {link.label}
+      {t(link.label)}
     </Link>
   )
 }
