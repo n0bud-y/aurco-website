@@ -1,0 +1,13 @@
+.topbar {
+  display: flex; align-items: center; justify-content: flex-end;
+  height: 56px; padding-inline: clamp(16px, 5.57vw, 107px);
+  background: var(--c-charcoal);
+}
+.topbar__list { display: flex; gap: 28px; }
+.topbar__link { font: 400 13px/1 var(--font-body); color: #fff; }
+.topbar__link:hover { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 600px) {
+  .topbar { justify-content: center; height: 44px; }
+  .topbar__list { gap: 18px; }
+  .topbar__link { font-size: 12px; }
+}

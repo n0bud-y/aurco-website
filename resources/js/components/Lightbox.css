@@ -1,0 +1,48 @@
+.lightbox {
+  width: 100vw; max-width: none; height: 100dvh; max-height: none; margin: 0;
+  padding: 80px 104px; border: 0; background: transparent;
+  align-items: center; justify-content: center;
+}
+.lightbox[open] { display: flex; }
+.lightbox::backdrop { background: rgba(8, 10, 14, .92); }
+html:has(dialog[open]) { overflow: hidden; }
+
+@keyframes lbFigureIn { from { opacity: 0; transform: scale(.94); } to { opacity: 1; transform: none; } }
+@keyframes lbBackdropIn { from { opacity: 0; } to { opacity: 1; } }
+.lightbox[open] .lightbox__figure { animation: lbFigureIn .35s cubic-bezier(.22, .61, .36, 1) both; }
+.lightbox[open]::backdrop { animation: lbBackdropIn .3s ease both; }
+.lightbox__figure { position: relative; width: min(88vw, 900px); margin: 0; }
+.lightbox__media { position: relative; border-radius: 24px; overflow: hidden; background: #20242b; }
+.lightbox__media img { width: 100%; height: auto; }
+.lightbox__media::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, .95) 100%);
+}
+.lightbox figcaption {
+  position: absolute; left: 28px; right: 28px; bottom: 22px;
+  display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+  font: 600 20px/1.3 var(--font-head); color: #fff;
+}
+.lightbox figcaption span { font: 500 15px/1 var(--font-body); color: rgba(255, 255, 255, .75); }
+
+.lightbox__close, .lightbox__nav {
+  position: fixed; display: grid; place-items: center; padding: 0; border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .35); background: rgba(255, 255, 255, .08);
+  color: #fff; cursor: pointer; transition: background-color .2s;
+}
+.lightbox__close:hover, .lightbox__nav:hover { background: rgba(255, 255, 255, .22); }
+.lightbox__close { top: 24px; right: 24px; width: 48px; height: 48px; }
+.lightbox__close svg { width: 22px; height: 22px; }
+.lightbox__nav { top: 50%; width: 56px; height: 56px; transform: translateY(-50%); }
+.lightbox__nav svg { width: 26px; height: 26px; }
+.lightbox__nav--prev { left: 24px; }
+.lightbox__nav--prev svg { transform: rotate(180deg); }
+.lightbox__nav--next { right: 24px; }
+
+@media (max-width: 767px) {
+  .lightbox { padding: 72px 16px 104px; }
+  .lightbox__nav { top: auto; bottom: 24px; transform: none; width: 48px; height: 48px; }
+  .lightbox__nav--prev { left: calc(50% - 60px); }
+  .lightbox__nav--next { right: calc(50% - 60px); }
+  .lightbox figcaption { left: 18px; right: 18px; bottom: 16px; font-size: 17px; }
+}

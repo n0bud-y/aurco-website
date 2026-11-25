@@ -1,0 +1,5 @@
+.clients__wall {
+  padding: clamp(16px, 2.5vw, 36px); border: 1px solid var(--c-border); border-radius: var(--radius-card);
+  background: #fff; box-shadow: 0 30px 60px -48px rgba(19, 31, 52, .45);
+}
+.clients__wall img { width: 100%; height: auto; }

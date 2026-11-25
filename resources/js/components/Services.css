@@ -1,0 +1,3 @@
+.services__deco { top: 0; right: 0; width: 631px; }
+@media (min-width: 1440px) { .services { --section-pad-bottom: 100px; } }
+@media (max-width: 1023px) { .services__deco { width: 420px; opacity: .8; } }

@@ -1,0 +1,38 @@
+/* Masked lines produced by GSAP SplitText */
+.split-line { will-change: transform; }
+
+/* Reading progress */
+.scroll-progress { position: fixed; inset: 0 0 auto 0; z-index: 60; height: 3px; background: rgba(19, 31, 52, .08); }
+.scroll-progress__bar {
+  display: block; height: 100%; transform: scaleX(0); transform-origin: left;
+  background: linear-gradient(90deg, var(--c-red), #ff7a45);
+}
+
+/* Intro loader */
+.preloader { position: fixed; inset: 0; z-index: 9998; display: grid; place-items: center; }
+.preloader__panels { position: absolute; inset: 0; display: flex; }
+.preloader__panel { flex: 1; background: #141414; }
+.preloader__content { position: relative; display: grid; justify-items: center; gap: 22px; }
+.preloader__logo { width: min(240px, 52vw); height: auto; }
+.preloader__bar { position: relative; width: min(320px, 60vw); height: 2px; overflow: hidden; background: rgba(255, 255, 255, .16); }
+.preloader__bar span { position: absolute; inset: 0; transform: scaleX(0); transform-origin: left; background: var(--c-red); }
+.preloader__count { font: 600 13px/1 var(--font-body); letter-spacing: .26em; color: rgba(255, 255, 255, .65); }
+
+/* Page transition curtain */
+.page-curtain { position: fixed; inset: 0; z-index: 9990; display: flex; visibility: hidden; pointer-events: none; }
+.page-curtain span { flex: 1; background: #141414; }
+
+/* Custom cursor */
+.cursor { display: none; }
+html.has-cursor .cursor { display: block; }
+html.has-cursor, html.has-cursor a, html.has-cursor button, html.has-cursor input, html.has-cursor textarea { cursor: none; }
+.cursor__dot, .cursor__ring {
+  position: fixed; top: 0; left: 0; z-index: 9999; border-radius: 50%;
+  pointer-events: none; mix-blend-mode: difference; will-change: transform;
+}
+.cursor__dot { width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; background: #fff; }
+.cursor__ring { width: 40px; height: 40px; margin: -20px 0 0 -20px; border: 1.5px solid rgba(255, 255, 255, .85); }
+
+@media (prefers-reduced-motion: reduce) {
+  .preloader, .page-curtain, .cursor, .scroll-progress { display: none !important; }
+}

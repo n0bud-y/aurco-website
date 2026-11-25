@@ -1,0 +1,17 @@
+.sticky-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 40; display: none;
+  background: rgba(17, 17, 17, .92); backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+  transform: translateY(-100%); transition: transform .45s cubic-bezier(.22, .61, .36, 1);
+}
+.sticky-header.is-visible { transform: none; }
+.sticky-header__inner {
+  display: flex; align-items: center; justify-content: space-between; gap: 32px;
+  height: 76px; padding-inline: clamp(24px, 4.7vw, 90px);
+}
+.sticky-header__logo img { width: 170px; height: auto; }
+.sticky-header .site-nav__list { gap: 26px; }
+.sticky-header .site-nav__link { height: 40px; }
+.sticky-header .site-nav__link.is-active { padding-inline: 18px; }
+.sticky-header .btn { height: 48px; padding-inline: 24px; font-size: 16px; }
+@media (min-width: 1240px) { .sticky-header { display: block; } }

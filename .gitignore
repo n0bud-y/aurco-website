@@ -1,0 +1,29 @@
+# Dependencies and build output
+/node_modules
+/vendor
+/public/build
+/public/hot
+/public/storage
+
+# Environment and secrets
+.env
+.env.backup
+.env.production
+/storage/*.key
+
+# Local data (never commit the live database or its backups)
+database/*.sqlite
+/storage/backups
+/storage/app/private/*
+/storage/app/public/*
+!/storage/app/public/.gitignore
+/bootstrap/cache/*.php
+
+# Large source files kept outside version control
+/app.zip
+/doc/*.pdf
+
+# Tooling
+.phpunit.result.cache
+.DS_Store
+Thumbs.db

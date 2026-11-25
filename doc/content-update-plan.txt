@@ -1,0 +1,308 @@
+================================================================================
+AURCO CONTRACTING - WEBSITE CONTENT UPDATE PLAN, EXECUTION & TIMELINE
+================================================================================
+Source Document : doc/Aurco Company Profile updated.pdf (69 pages, 2026-27)
+Target Project  : AURCO Contracting Website & CRM (Laravel 12 + Inertia + React)
+Local App URL   : http://localhost:8000 (Website) | http://localhost:8000/admin (CRM)
+Plan Created    : 2026-11-25 03:35 (+05:00)
+Current Phase   : Steps 1-8 complete (Option B — full profile upgrade). See section 5 for follow-ups.
+
+Status Legend   : [PENDING] | [IN_PROGRESS] | [DONE] | [SKIPPED] | [BLOCKED]
+
+--------------------------------------------------------------------------------
+1. SUMMARY OF GAPS FOUND (CURRENT WEBSITE VS 2026-27 PDF)
+--------------------------------------------------------------------------------
+A. Outdated / Placeholder Content Currently on Website:
+   1. Company address misses Office # 402 (PDF has: 402, 408, 409 & 410).
+   2. About section support phone is a placeholder US/DR number (+1 809 120 6705).
+   3. "Why choose us" cards ALL show "800+ Project Completed" (PDF: 150+ Projects
+      Completed, 800+ Workforce, 200+ Equipment Assets, 10M+ Safe Man Hours).
+   4. Projects list has 8 fake residential/commercial demo entries ("Aspen
+      Heights", "Forest Hill Towers", "Bayside Residences", "Parkview Plaza",
+      "Marina Towers", etc.) instead of AURCO's real Aramco/NEOM/SWCC/Saipem
+      industrial & infrastructure projects.
+   5. Services show 4 generic residential cards ("Building Construction",
+      "Architecture Design", "Building Renovation", "Building Maintenance")
+      instead of AURCO's 3 core business lines (Projects & Construction,
+      Rental Equipment, Facility Management) + specialized capabilities.
+   6. Gallery uses demo captions matching the fake projects.
+   7. Testimonials have fake names ("Jane Smith", "Chris Martinez", "Alis White")
+      and duplicated placeholder quotes.
+   8. Blog posts have residential B2C titles ("How to Design Your Dream Home")
+      unsuitable for an industrial/EPC contracting company.
+   9. Footer links ("AURCO's Certificates", "AURCO's Award", "Vision & Mission",
+      "Health and Safety", "Our Clients", "Quality Assurance") and social links
+      (including a leftover "github" icon) all point to "#".
+  10. Header top links ("Newsroom", "Resources", "Careers", "AURCO Websites")
+      all point to "#".
+
+B. Rich New Content in the 2026-27 PDF Not Yet on the Website:
+   - Company Tagline: "Built on Trust. Driven by Excellence."
+   - Leadership Messages: Chairman/Founder Muhammad Yaqoob & CEO Attiq Ur Rehman
+   - Company History: Established 2009 (17+ years), Vision, Mission, 8 Core Values
+   - Key Metrics: 150+ Projects, 1B+ SAR Executed Value, 10+ Industries,
+     10M+ Safe Man Hours & Zero LTI, 17+ Years, 7+ KSA Locations, 800+ Workforce,
+     200+ Equipment Assets, 37% Local Content Score
+   - Regional Presence Map: Khobar (HQ), Jubail, Riyadh, Yanbu, Jazan, Jafurah,
+     NEOM, Turaif
+   - 3 Business Lines + detailed scopes:
+     * 01 Projects & Construction (6 disciplines)
+     * 02 Rental Equipment (4 equipment categories + 200+ fleet breakdown)
+     * 03 Facility Management (Hard FM, Soft FM, Catering Services)
+   - Real Project Portfolio (16 featured photo case studies + tables for Completed
+     Construction, Completed TCF, Equipment Rental Agreements, Completed FM,
+     and Ongoing 2024-2026 Projects)
+   - 40+ Major Clients (Saudi Aramco, NEOM, SEC, SABIC, Ma'aden, SWCC, Saipem,
+     Samsung E&A, Hyundai, JGC, CCC, L&T, etc.)
+   - HSE & Safety Statistics Record (2022-2026: Zero LTI, Zero Fatalities)
+   - Quality Assurance & Control (ISO 9001:2015, ISO 14001:2015, ISO 45001:2018)
+   - Sustainability & CSR (UN SDGs, Achilles Score 81 / 5-Star, 4 CSR pillars)
+   - Credentials & Registrations (SCA, D-U-N-S 55-786-0768, Aramco SACS-002
+     Cybersecurity Compliance, CR 7001603997, Balady, GOSI, ZATCA, SCE, Qiwa)
+   - Digital Advancement (Microsoft Dynamics 365 ERP)
+   - Manpower (800+) & Equipment (200+) Breakdown + Financial Standing
+   - Recognition & Appreciation Certificates (Aramco, NEOM, Acciona, Saipem, etc.)
+   - Contact details: Fax +966 13 896 1712, LinkedIn & Facebook URLs, Website
+     www.aurco.com, Coordinates 26.2797 N, 50.2088 E
+
+--------------------------------------------------------------------------------
+2. STEP-BY-STEP RECOMMENDED ACTIONS (WHAT TO CHANGE & ADD)
+--------------------------------------------------------------------------------
+
+STEP 1: Fix Company Details, Contact Info & Social Links (CRM Settings)
+  Status: [DONE]
+  Scope : database/seeders/ContentSeeder.php + live SQLite `settings` table
+  Changes:
+  - Address: "Office # 402, 408, 409 & 410, 4th Floor, Jarir Plaza Corniche, Al Khobar 34427, KSA"
+  - Legal Name: "Attiq Ur Rehman Contracting Co. (AURCO)"
+  - Replace fake About phone "+1 809 120 6705" with "+966 13 894 4304" (tel:+966138944304)
+  - Add Fax (+966 13 896 1712) & confirm email (info@aurcontracting.com vs info@aurcocontracting.com)
+  - Update Contact Map query / coordinates (26.2797, 50.2088 / Jarir Plaza Corniche, Al Khobar)
+  - Update Footer social links to real URLs:
+    * LinkedIn: https://www.linkedin.com/aurco
+    * Facebook: https://www.facebook.com/AURCO/
+    * Remove unused placeholder links (GitHub, X, Instagram unless client provides URLs)
+  - Update Footer "about" text to reflect 2009 establishment, 17+ years, and tagline
+    "Built on Trust. Driven by Excellence."
+
+STEP 2: Update Hero, About, Vision/Mission & Key Statistics (Home Page Copy)
+  Status: [DONE]
+  Scope : ContentSeeder.php + `settings` table (hero, about, expertise) + optional UI tweaks
+  Changes:
+  - Hero: Incorporate "Built on Trust. Driven by Excellence." + industrial/EPC/FM/rental positioning
+  - About: Update paragraph using "Who We Are" (p.5): established in 2009, 17+ years,
+    integrated engineering, construction, facility management & equipment rental across
+    Oil & Gas, Petrochemical, Power & Utilities, Infrastructure, Industrial, Commercial,
+    and Government sectors.
+  - About Checklist: e.g. "17+ Years Across 7+ KSA Regions", "ISO 9001, 14001 & 45001 Certified",
+    "10M+ Safe Man Hours (Zero LTI)" (or Core Values / 3 Business Lines).
+  - Fix "Why Choose Us" (Expertise) cards & stats:
+    * Replace incorrect "800+ Project Completed" on all 3 cards with accurate stats:
+      - Card 1 (Projects & Construction / General Contracting): 150+ Projects Completed
+      - Card 2 (Equipment Rental & Fleet): 200+ Equipment Assets
+      - Card 3 (Safety, Workforce & Quality / Facility Management): 10M+ Safe Man Hours (or 800+ Workforce)
+    * Update bullet points on the 3 cards to reflect PDF capabilities (Site Dev/Civil/Steel/TCF,
+      Mechanical/Piping/Electrical/HSE, Equipment Rental & Facility Management).
+
+STEP 3: Update Services & Business Lines
+  Status: [DONE]
+  Scope : `services` table + ContentSeeder.php (+ optional Services detail UI / sub-items)
+  Changes:
+  - Replace the 4 generic residential services with AURCO's real core services:
+    1. Projects & Construction (Civil, Industrial, Infrastructure, Steel, Modular/TCF, MEP)
+    2. Equipment Rental (Lifting, Earthmoving, Transportation, Power & Machinery)
+    3. Facility Management (Hard FM, Soft FM, Catering Services)
+    4. Steel Fabrication & Modular Solutions (or Safety, Security & Fencing)
+  - Update `services_section` heading/intro text in CRM.
+  - Optional Enhancement: Add service descriptions / sub-categories (from PDF p.11, 39, 42-43)
+    or dedicated `/services` page / modal so visitors can inspect full scopes.
+
+STEP 4: Replace Fake Projects with Real AURCO Projects + Extract Project Photos
+  Status: [DONE]
+  Scope : `projects` table, storage/app/public/, ContentSeeder.php (+ optional schema/UI upgrade)
+  Changes:
+  - Extract real project photos from PDF pages 12-27 (and fleet/FM/steel pages).
+  - Replace the 8 fake projects with real AURCO projects (at least 12-16 featured/portfolio
+    projects across categories: Industrial & Oil/Gas, Infrastructure & Roads, Modular & TCF,
+    Facility Management, Commercial & Warehouses):
+    * Featured (Home 4 cards):
+      1. Al Reef Sugar Refinery (Industrial | Jazan | SAR 241M)
+      2. Seawater Reverse Osmosis Plant SWRO-2 (Infrastructure & Utilities | Al Khobar | SAR 53.2M)
+      3. Hydrogen Fueling Station (Energy / Industrial | Dhahran | SAR 4.5M)
+      4. Design & Build Permanent Warehouse Facility (Industrial / NEOM | NEOM | SAR 16.1M)
+    * Additional Portfolio Projects:
+      - SFSP Main Centre & Helipad (NEOM)
+      - NEOM Zero Site Office (NEOM)
+      - Fadhili Gas Increment Program Camp (Fadhili)
+      - Fadhili Gas Increment Program Pkg 2 (Zuluf / Fadhili)
+      - Zuluf Onshore Oil Facilities Camp Phase I & II (Zuluf)
+      - Tanajib Gas Plant Pkg 5 Security Support Facilities (Tanajib)
+      - Jafurah Upstream Pipelines & Wells Tie-Ins (Jafurah)
+      - Berri Development Project Package 1 (Abu Ali)
+      - Marjan Increment Pkg 10 (Marjan)
+      - Al Darb Training Center Renovation (Al Darb)
+      - 100-Employee CIPD Office Facilities (Jazan)
+      - Communication Tower Erection (Zuluf)
+  - Optional UI/Schema Upgrade (Recommended):
+    * Add `client`, `year`, `contract_value` fields to `projects` table + CRM form + `Projects.jsx`
+      card/modal, AND optionally add tabs/tables for Ongoing Projects (2024-2026) & TCF/FM records.
+
+STEP 5: Replace Gallery Photos & Categories with Real PDF Site Photography
+  Status: [DONE]
+  Scope : `gallery_images` table, storage/app/public/, ContentSeeder.php
+  Changes:
+  - Extract clean site photos from PDF visual showcase pages:
+    * Mechanical Works (p.32)
+    * Modular Works (p.34)
+    * Security Fencing Works (p.36)
+    * Steel Structure Fabrication (p.38)
+    * Equipment Fleet (p.40)
+    * Facility Management & Catering (p.44)
+    * Construction Projects (p.12-27)
+  - Replace all demo captions ("Aspen Heights", etc.) and update categories to:
+    `Projects`, `Mechanical`, `Modular & TCF`, `Steel Fabrication`, `Fencing`, `Equipment`, `Facility Management`.
+
+STEP 6: Add New Profile Sections / Pages & Wire Up Dead Footer/Header Links
+  Status: [DONE]
+  Scope : React Pages/Components + routes/web.php + SiteContent.php + CRM (if editable)
+  Recommended additions to cover key PDF pages and replace `#` dead links:
+  6A. At-a-Glance Stats Strip + Vision/Mission/Core Values (Home or `/about` page)
+      - 150+ Projects, 1B+ SAR, 10M+ Safe Man Hours, 800+ Workforce, 200+ Fleet,
+        17+ Years, 7+ KSA Regions, 37% Local Content.
+  6B. Clients Marquee / Grid ("Our Clients" - 40+ logos from PDF p.48: Aramco, NEOM,
+      SABIC, SEC, SWCC, Saipem, Samsung E&A, JGC, CCC, L&T, etc.).
+  6C. Credentials, Certifications & HSE Page (`/about` or `/credentials` + `/hse`):
+      - ISO 9001:2015, ISO 14001:2015, ISO 45001:2018
+      - Achilles Sustainability Rating (Score: 81, 5 Stars) + UN SDGs + CSR
+      - Saudi Aramco Cybersecurity Compliance (SACS-002)
+      - SCA Membership, D-U-N-S (55-786-0768), 37% Local Content, Gov Credentials
+      - Annual Safety Statistics Table (2022-2026: Zero LTI, Zero Fatalities)
+      - Recognition Certificates gallery
+      - Microsoft Dynamics 365 Digital Transformation highlight
+  6D. Wire up all Footer links (`footer.services_links`) & Header `topLinks` to real
+      sections/routes (no `#` dead links), and add Services/Credentials to navigation.
+  6E. Optional: Regional Presence interactive map/list (7+ KSA locations) & Equipment/Manpower summary.
+
+STEP 7: Clean Up Testimonials, FAQs & News/Blog Posts
+  Status: [DONE]
+  Scope : `testimonials`, `faqs`, `posts` tables + ContentSeeder.php
+  Changes:
+  - Testimonials: Replace fake names ("Jane Smith", "Chris Martinez", "Alis White") with
+    real client commendation excerpts from the Recognition Certificates (Al Reef Sugar
+    Refinery, Acciona-RTCC, Saipem, NEOM, Saudi Aramco, JIGPC) OR disable/hide section
+    until client provides quotes.
+  - FAQs: Update 4-6 FAQs to cover Projects & Construction, Equipment Rental (200+ fleet),
+    Facility Management (Hard/Soft/Catering), ISO/Aramco SACS-002 compliance, and KSA coverage.
+  - Blog / News: Replace B2C home-building posts with real AURCO company milestones:
+    1. "AURCO Achieves Saudi Aramco SACS-002 Cybersecurity Compliance & ISO Recertification (2026)"
+    2. "10M+ Safe Man-Hours & Zero LTI: AURCO's HSE Culture Across Mega-Projects"
+    3. "Digitalizing Operations with Microsoft Dynamics 365 & 37% Local Content Impact"
+
+STEP 8: Verification, Asset Build & Final QA
+  Status: [DONE]
+  Scope : Local server + CRM + Public pages + `npm run build`
+  Checks:
+  - Verify all CRM `/admin` pages (Projects, Gallery, Services, Testimonials, FAQs, Posts, Site Content).
+  - Verify all public routes (`/`, `/projects`, `/gallery`, `/contact`, any new routes).
+  - Check responsive layout, Arabic translation (`ENG / AR`), image loading, and zero broken links.
+  - Run `npm run build` and verify clean production bundle.
+
+--------------------------------------------------------------------------------
+3. DECISIONS NEEDED FROM USER BEFORE EXECUTION
+--------------------------------------------------------------------------------
+Please confirm your preferences on:
+1. Scope Level:
+   - [Option A] Content-Only Update (update existing CRM data, settings, seeders & images
+     without changing React page structure/migrations).
+   - [Option B] Full Profile Upgrade (Option A + add new sections/pages for Credentials &
+     Certifications, Client Logos, HSE Safety Stats, Leadership/Vision/Values, Real Stats
+     Strip, and Project Client/Value/Year details). <-- RECOMMENDED
+2. Image Source:
+   - Extract photos directly from the PDF slides, or will client provide original separate photos?
+3. Contact Email Check:
+   - PDF page 68 shows `info@aurcontracting.com` in main list and `info@aurcocontracting.com` in
+     bottom-left corner. Which one is primary?
+4. Testimonials & Blog Sections:
+   - Replace with certificate commendations & AURCO news posts, or hide either section?
+5. Target URLs for Header Top Links (`Newsroom`, `Resources`, `Careers`, `AURCO Websites`):
+   - Keep/link to sections/PDF download, or simplify top bar?
+
+--------------------------------------------------------------------------------
+4. SESSION TIMELINE & RUNTIME EXECUTION LOG
+--------------------------------------------------------------------------------
+[2026-11-25 01:55] Session started; inspected workspace (Laravel 12 + Inertia + React 19).
+[2026-11-25 02:19] Configured local `.env` (`APP_URL=http://localhost:8000`) & fixed `public/storage` link.
+[2026-11-25 02:20] Started local Laravel dev server (`http://127.0.0.1:8000`) & verified HTTP 200.
+[2026-11-25 02:23] Detected Vite dev server `EBUSY` watch lock on `doc/Aurco Company Profile updated.pdf`;
+                   verified prebuilt `public/build` serves cleanly without `public/hot`.
+[2026-11-25 02:53] User requested reading `doc/Aurco Company Profile updated.pdf` and creating
+                   a step-by-step plan + runtime-updated `.txt` tracker in `doc/`.
+[2026-11-25 03:17] Extracted PDF metadata (69 pages, 201.2 MB) and split into readable chunks.
+[2026-11-25 03:33] Completed visual & text audit of all 69 PDF pages and existing codebase/CRM.
+[2026-11-25 03:35] Created `doc/content-update-plan.txt` with gap analysis, 8-step plan, and timeline.
+                   Waiting for user confirmation to start Step 1.
+[2026-11-25 21:45] New session: re-read plan, restarted Laravel server (http://127.0.0.1:8000);
+                   verified /, /projects, /gallery, /contact = 200 and /admin -> /login.
+[2026-11-25 21:50] User decisions recorded:
+                   1. Scope      : Option B - Full Profile Upgrade
+                   2. Images     : Extract photos directly from the PDF
+                   3. Email      : info@aurcontracting.com is primary
+                   4. Testimonials & Blog : Replace both (certificate excerpts + AURCO news)
+                   5. Header top links : still open (asked user)
+[2026-11-25 22:00] User said "go". Defaults used: LinkedIn URL as printed in PDF, Arabic left as-is
+                   (Google Translate toggle), top-bar links decided in Step 6.
+[2026-11-25 22:10] DB backed up to storage/backups/database-before-profile-update-20261125-2210.sqlite.
+[2026-11-25 22:30] Rendered all 69 PDF pages (slides are flat images) and read every page.
+[2026-11-25 23:00] Cropped 154 photos/certificates from the PDF -> database/seeders/stubs/images/profile/*.webp
+[2026-11-25 23:30] Steps 1-7 implemented (see section 5). `php artisan migrate:fresh --seed` applied.
+[2026-11-25 23:50] Step 8: `npm run build` clean; all public routes 200; all CRM screens 200;
+                   CRM create/update/delete round-trip tested; desktop + mobile screenshots reviewed.
+
+--------------------------------------------------------------------------------
+5. WHAT WAS DELIVERED
+--------------------------------------------------------------------------------
+New pages   : /about (who we are, leadership messages, vision/mission, 8 core values,
+              regional presence map, why choose AURCO, resources, clients)
+              /services (4 business lines with full capability lists, 200+ fleet breakdown)
+              /credentials (HSE pillars, 2022-2026 safety statistics, ISO 9001/14001/45001,
+              Achilles, QA/QC, UN SDGs, CSR, local content 37%, SCA, D-U-N-S, SACS-002,
+              government registrations, Dynamics 365, recognition certificates)
+Home        : new copy, "AURCO at a glance" stats strip, client logo wall, real services,
+              featured projects, certificate-based testimonials, 6 FAQs, 3 news posts.
+Projects    : 16 real case studies with client / year / role / value + "Track record"
+              tables (21 construction, 16 TCF, 10 FM, 4 rental agreements, 8 ongoing).
+Gallery     : 105 real photos in 7 categories.
+Navigation  : Home | About Us | Services | Projects | Gallery | QHSE | Contact
+              ("Our Expertise" and "INQUIRY" replaced; Contact Us button still in header).
+              Top bar: Newsroom -> /#blog, Resources -> /credentials,
+              Careers -> mailto:info@aurcontracting.com, AURCO Websites -> www.aurco.com
+              (editable in CRM > Site content > Footer > Top bar links). No "#" links left.
+CRM         : new "Track record" screen; projects gain client/year/value/role; services gain
+              summary + capability lists; new Site content tabs: Key figures, About page,
+              Clients, Services page, QHSE & credentials page; testimonials allow "no stars".
+Schema      : migration 2026_11_25_000100_add_company_profile_fields.
+
+--------------------------------------------------------------------------------
+6. DATA ISSUES IN THE PDF (PLEASE CONFIRM WITH CLIENT)
+--------------------------------------------------------------------------------
+1. Al Reef Sugar Refinery: case-study page says March 2015, table p.28 says 2021.
+   Website uses 2015 on the project card and 2021 in the track-record table.
+2. Ongoing projects (p.47): contract values are identical to the TCF table (p.29) in the same
+   order -> looks like a copy/paste error. Values NOT published for ongoing projects.
+3. LinkedIn URL "https://www.linkedin.com/aurco" is not a valid company-page URL format.
+4. HSE slide (p.49): "Every Stage" text duplicates "Environmental" -> pillar left out.
+5. SWRO-2: case page client = SWCC (main contractor Acciona/RTCC JV); table client = Acciona.
+6. Fadhili Pkg 2: case page location "Zuluf On Shore Oil Facilities Project", year March 2025;
+   table says Fadhili, 2024. Website uses Fadhili / March 2025.
+7. Contract values for Zuluf camp, Jafurah tie-ins, Marjan, NEOM Zero and the comm tower do
+   not match a single table row, so they are left blank on those cards.
+
+--------------------------------------------------------------------------------
+7. FOLLOW-UPS / NEEDS FROM CLIENT
+--------------------------------------------------------------------------------
+- High-resolution original photos (PDF crops are ~685px wide; some look soft when enlarged).
+  The home/page hero still uses the original stock city photo — a real AURCO hero is needed.
+- Correct LinkedIn URL; any other social accounts.
+- Approval to publish contract values and named certificate quotes on the public site.
+- Arabic: site still relies on the Google Translate toggle (no hand-written Arabic copy).
+================================================================================
