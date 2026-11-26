@@ -14,13 +14,10 @@
 .clients__row { direction: ltr; overflow: hidden; border-block: 1px solid var(--c-border); background: #fff; }
 .clients__track { display: flex; width: max-content; animation: clientsMarquee var(--speed, 50s) linear infinite; }
 .clients__row.is-reverse .clients__track { animation-direction: reverse; }
-.clients__marquee:hover .clients__track { animation-play-state: paused; }
 .clients__strip {
   display: block; flex: none; height: var(--row-h); width: calc(var(--row-h) * var(--ratio));
   background-repeat: no-repeat; background-size: 100% 600%;
-  filter: grayscale(1) contrast(1.05); opacity: .78; transition: filter .4s ease, opacity .4s ease;
 }
-.clients__row:hover .clients__strip { filter: none; opacity: 1; }
 @keyframes clientsMarquee { to { transform: translateX(-50%); } }
 
 @media (prefers-reduced-motion: reduce) {
