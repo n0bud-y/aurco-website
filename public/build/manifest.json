@@ -1,6 +1,6 @@
 {
-  "_Clients-B9bYccS5.js": {
-    "file": "assets/Clients-B9bYccS5.js",
+  "_Clients-Cc3U4NzK.js": {
+    "file": "assets/Clients-Cc3U4NzK.js",
     "name": "Clients",
     "imports": [
       "_rolldown-runtime-CbXtAM7H.js",
@@ -461,14 +461,14 @@
     "src": "node_modules/@fontsource/manrope/files/manrope-vietnamese-700-normal.woff2"
   },
   "resources/js/Pages/About.jsx": {
-    "file": "assets/About-BTRqsx8C.js",
+    "file": "assets/About-BFF0pL00.js",
     "name": "About",
     "src": "resources/js/Pages/About.jsx",
     "isDynamicEntry": true,
     "imports": [
       "_NavLink-BhqFVmCE.js",
       "_PageHero-DTONsbEl.js",
-      "_Clients-B9bYccS5.js",
+      "_Clients-Cc3U4NzK.js",
       "_SectionHeading-DnLGif0c.js",
       "_CtaBanner-hMj--BEW.js"
     ],
@@ -512,7 +512,7 @@
     ]
   },
   "resources/js/Pages/Gallery.jsx": {
-    "file": "assets/Gallery-omoZlfSB.js",
+    "file": "assets/Gallery-CYE5qelM.js",
     "name": "Gallery",
     "src": "resources/js/Pages/Gallery.jsx",
     "isDynamicEntry": true,
@@ -530,7 +530,7 @@
     ]
   },
   "resources/js/Pages/Home.jsx": {
-    "file": "assets/Home-CruOLU3t.js",
+    "file": "assets/Home-DihfYw-0.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.jsx",
     "isDynamicEntry": true,
@@ -540,7 +540,7 @@
       "_gsap-CvDoa17S.js",
       "resources/js/app.jsx",
       "_Header-CxRQyKGL.js",
-      "_Clients-B9bYccS5.js",
+      "_Clients-Cc3U4NzK.js",
       "_SectionHeading-DnLGif0c.js",
       "_CtaBanner-hMj--BEW.js",
       "_Faq-Cxn1ECPf.js"
@@ -600,7 +600,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-pGEDjOPE.js",
+    "file": "assets/app-vtXAM_16.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,

@@ -55,7 +55,7 @@ export default function Gallery() {
   return (
     <>
       <Head title={t("Gallery")} />
-      <PageHero title={galleryPage.hero.title} text={galleryPage.hero.text} crumb={t("Gallery")} image={(galleryPage.items[38] ?? galleryPage.items[0])?.src} />
+      <PageHero title={galleryPage.hero.title} text={galleryPage.hero.text} crumb={t("Gallery")} image={(galleryPage.items[1] ?? galleryPage.items[0])?.src} />
 
       <section className="gallery section" aria-labelledby="gallery-title">
         <div className="container">

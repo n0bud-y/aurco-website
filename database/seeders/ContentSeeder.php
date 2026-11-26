@@ -89,7 +89,7 @@ class ContentSeeder extends Seeder
                 'eyebrow' => 'Built on Trust. Driven by Excellence.',
                 'title' => 'Build. Equip. Operate.',
                 'text' => 'Since 2009, AURCO has delivered 150+ projects for Saudi Aramco, NEOM, SWCC and the Kingdom’s leading contractors — with 10 million+ safe man-hours and zero lost-time incidents.',
-                'image' => $this->img('hero-bg.webp'),
+                'image' => $this->profile('hero-site'),
             ],
             'stats' => [
                 'eyebrow' => 'AURCO at a glance',
@@ -615,7 +615,35 @@ class ContentSeeder extends Seeder
 
     private function seedGallery(): void
     {
-        $photos = [];
+        // Full-resolution site photography from the live aurco.com media library, shown first.
+        $photos = array_map(fn ($row) => ['gallery-hd-'.$row[0], $row[1], $row[2]], [
+            ['01', 'Projects', 'Al Reef Sugar Refinery, Jazan: aerial view'],
+            ['02', 'Projects', 'Al Reef Sugar Refinery site overview'],
+            ['03', 'Mechanical', 'Column erection with a mobile crane, Al Reef'],
+            ['04', 'Steel Fabrication', 'Refinery steel structure erection, Al Reef'],
+            ['05', 'Steel Fabrication', 'Multi-level steel structure, Al Reef'],
+            ['06', 'Projects', 'Concrete clarifier tanks, Al Reef'],
+            ['07', 'Projects', 'Sea water treatment area under construction'],
+            ['08', 'Equipment', 'All-terrain crane lifting a process vessel'],
+            ['09', 'Mechanical', 'Tandem lift of process columns'],
+            ['10', 'Mechanical', 'Process vessel installed in a steel structure'],
+            ['11', 'Projects', 'Hydrogen Fueling Station canopy, Dhahran'],
+            ['12', 'Projects', 'AURCO team at the Hydrogen Fueling Station'],
+            ['13', 'Mechanical', 'Hydrogen station commissioning walk-through'],
+            ['14', 'Projects', 'Marjan Increment Pkg 10 earthworks'],
+            ['15', 'Equipment', 'Motor grader on site preparation'],
+            ['16', 'Projects', 'Laydown yard and site mobilisation'],
+            ['17', 'Modular & TCF', 'Crane placing modular cabins'],
+            ['18', 'Modular & TCF', 'Large modular workforce camp'],
+            ['19', 'Modular & TCF', 'Modular accommodation blocks'],
+            ['20', 'Modular & TCF', 'AURCO modular site offices'],
+            ['21', 'Modular & TCF', 'NEOM Zero site office interior'],
+            ['22', 'Projects', 'SFSP Main Centre, NEOM: aerial view'],
+            ['23', 'Fencing', 'AURCO fencing crew on site'],
+            ['24', 'Fencing', 'Completed chain-link perimeter fence'],
+            ['25', 'Projects', 'AURCO site team on a project site'],
+            ['26', 'Projects', 'Annual team lunch, Al Reef Sugar Refinery'],
+        ]);
 
         $projectPhotos = [
             'hydrogen-fueling-station' => 'Hydrogen Fueling Station, Dhahran',

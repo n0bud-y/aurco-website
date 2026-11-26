@@ -362,3 +362,17 @@ Schema      : migration 2026_11_25_000100_add_company_profile_fields.
 - Contact: lifted cards with pulsing icons, framed map with address card and directions link.
 - Fixed: the "All" filter did nothing in Arabic on Projects and Gallery.
 - Checked: English + Arabic, 1440px and 390px (no sideways scroll), filters, no console errors.
+
+11. HD PHOTOGRAPHY FROM THE LIVE SITE (aurco.com)
+-------------------------------------------------
+- Pulled the original full-resolution uploads from the live aurco.com media library
+  (WordPress media API), skipping theme stock photos, logos and certificates.
+- Replaced the low-resolution PDF crops (same file names, so no CMS changes needed):
+  project photos (Al Reef, Hydrogen station, SFSP NEOM, Marjan Pkg 10), service panels
+  (Projects, Rental, Steel & Modular), "Why choose" cards, About/QHSE team photo,
+  About banner and two FAQ photos.
+- Home hero / default page banner now uses an HD drone shot of Al Reef (was template stock).
+- Added 26 HD photos at the top of the Gallery with English + Arabic captions.
+- Camera date stamps and phone watermarks were trimmed off the bottom edge.
+- To check with the client: photo "Sea water treatment area" is captioned generically
+  because the live site does not say which project it belongs to.
