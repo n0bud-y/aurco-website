@@ -87,7 +87,7 @@ class ContentSeeder extends Seeder
             ],
             'hero' => [
                 'eyebrow' => 'Built on Trust. Driven by Excellence.',
-                'title' => 'Construction, equipment rental and facility management across the Kingdom',
+                'title' => 'Build. Equip. Operate.',
                 'text' => 'Since 2009, AURCO has delivered 150+ projects for Saudi Aramco, NEOM, SWCC and the Kingdom’s leading contractors — with 10 million+ safe man-hours and zero lost-time incidents.',
                 'image' => $this->img('hero-bg.webp'),
             ],
