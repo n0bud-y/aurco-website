@@ -17,10 +17,8 @@
 }
 .presence__place svg { width: 18px; height: 18px; color: #ff8a90; }
 .presence__place small { font-size: 12px; font-weight: 500; color: #ffb4b8; }
-.presence__place.is-hq { background: var(--btn-gradient); border-color: transparent; }
-.presence__place.is-hq svg, .presence__place.is-hq small { color: #fff; }
 .presence__place:hover, .presence__place.is-active { border-color: #ff5a62; background: rgba(200, 22, 30, .25); transform: translateY(-2px); }
-.presence__place.is-hq.is-active { background: var(--btn-gradient); }
+
 
 .presence__stage { position: relative; aspect-ratio: 1 / 0.92; }
 .presence__canvas { position: absolute; inset: 0; }
@@ -56,8 +54,10 @@
   display: grid; place-items: center; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px;
   background: rgba(255, 255, 255, .14); font: 700 11.5px/1 var(--font-head); color: #fff;
 }
-.presence__place.is-selected { border-color: #ff5a62; background: rgba(200, 22, 30, .35); box-shadow: 0 0 0 3px rgba(200, 22, 30, .25); }
-.presence__place.is-hq.is-selected { background: var(--btn-gradient); box-shadow: 0 0 0 3px rgba(255, 90, 98, .35); }
+/* Red only for the selected city (head office included) */
+.presence__place.is-selected { border-color: transparent; background: var(--btn-gradient); box-shadow: 0 0 0 3px rgba(255, 90, 98, .3); }
+.presence__place.is-selected svg, .presence__place.is-selected small { color: #fff; }
+.presence__place.is-selected .presence__count { background: rgba(255, 255, 255, .22); }
 .presence__place:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 
 .presence__card-slot { margin-top: 26px; min-height: 0; }
