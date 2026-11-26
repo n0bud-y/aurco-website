@@ -165,6 +165,10 @@ export default {
   "Man-hours worked per year": "ساعات العمل المنجزة سنويًا",
   "man-hours worked, {from}–{to}": "ساعة عمل منجزة، {from}–{to}",
 
+  "Operating location": "موقع تشغيلي",
+  "projects delivered here": "مشروعًا منفذًا هنا",
+  "AURCO teams and equipment serve clients in this region.": "تخدم فرق أوركو ومعداتها العملاء في هذه المنطقة.",
+
   // Browser tab suffix
   'AURCO Contracting': 'أوركو للمقاولات',
 }

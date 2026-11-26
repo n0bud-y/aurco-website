@@ -134,3 +134,4 @@
 [dir='rtl'] .digital-points li:hover { transform: translateX(-4px); }
 [dir='rtl'] .iso-images .frame-btn:hover { transform: perspective(900px) rotateY(5deg) translateY(-4px); }
 [dir='rtl'] .safety-chart__tick span { inset-inline-start: 0; }
+[dir='rtl'] .presence__card-link svg { transform: scaleX(-1); }

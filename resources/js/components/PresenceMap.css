@@ -27,7 +27,8 @@
 .presence__canvas canvas { display: block; width: 100% !important; height: 100% !important; cursor: grab; }
 .presence__fallback { width: 100%; height: 100%; object-fit: contain; border-radius: var(--radius-card); background: #fff; }
 
-.presence__labels { position: absolute; inset: 0; pointer-events: none; }
+.presence__labels { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.presence__label { transition: opacity .25s ease; }
 .presence__label { position: absolute; left: 0; top: 0; will-change: transform; }
 .presence__label.is-hq { z-index: 2; }
 .presence__label > span {
@@ -48,3 +49,43 @@
   .presence__place { padding: 9px 13px; font-size: 14px; }
   .presence__label > span { font-size: 11px; padding: 4px 8px; }
 }
+
+/* ---- Clickable locations ---- */
+.presence__place { position: relative; }
+.presence__count {
+  display: grid; place-items: center; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px;
+  background: rgba(255, 255, 255, .14); font: 700 11.5px/1 var(--font-head); color: #fff;
+}
+.presence__place.is-selected { border-color: #ff5a62; background: rgba(200, 22, 30, .35); box-shadow: 0 0 0 3px rgba(200, 22, 30, .25); }
+.presence__place.is-hq.is-selected { background: var(--btn-gradient); box-shadow: 0 0 0 3px rgba(255, 90, 98, .35); }
+.presence__place:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+.presence__card-slot { margin-top: 26px; min-height: 0; }
+.presence__card {
+  position: relative; padding: 22px 24px 22px; border-radius: 22px;
+  background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .14); backdrop-filter: blur(8px);
+  animation: presenceCard .5s cubic-bezier(.2, .7, .2, 1);
+}
+@keyframes presenceCard { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.presence__card-close {
+  position: absolute; top: 14px; inset-inline-end: 14px; display: grid; place-items: center; width: 34px; height: 34px;
+  border: 1px solid rgba(255, 255, 255, .2); border-radius: 50%; background: transparent; color: #fff; cursor: pointer;
+}
+.presence__card-close:hover { background: var(--c-red); border-color: var(--c-red); }
+.presence__card-close svg { width: 16px; height: 16px; }
+.presence__card-kicker { font: 700 12px/1 var(--font-body); letter-spacing: .12em; text-transform: uppercase; color: #ff8a90; }
+.presence__card-title { display: flex; align-items: center; gap: 8px; margin-top: 10px; font: 700 24px/1.2 var(--font-head); color: #fff; }
+.presence__card-title svg { width: 22px; height: 22px; color: #ff8a90; }
+.presence__card-stat { margin-top: 12px; font-size: 15px; }
+.presence__card-stat strong { margin-inline-end: 4px; font: 800 26px/1 var(--font-head); color: #ff4b53; }
+.presence__card-list { display: grid; gap: 8px; margin-top: 14px; }
+.presence__card-list li {
+  display: flex; justify-content: space-between; gap: 14px; padding-bottom: 8px; border-bottom: 1px solid rgba(255, 255, 255, .1);
+  font-size: 14.5px; line-height: 1.4; color: rgba(255, 255, 255, .88);
+}
+.presence__card-list small { flex: none; color: rgba(255, 255, 255, .55); font-size: 13px; }
+.presence__card-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; font: 700 15px/1 var(--font-head); color: #ffb4b8; }
+.presence__card-link:hover { color: #fff; }
+.presence__card-link svg { width: 18px; height: 18px; }
+.presence__card-empty { margin-top: 10px; font-size: 15px; line-height: 1.6; }
+@media (prefers-reduced-motion: reduce) { .presence__card { animation: none; } }

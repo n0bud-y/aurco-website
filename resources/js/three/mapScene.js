@@ -147,11 +147,30 @@ export function mountMapScene(container, { outline, locations, labels = [], redu
     camera.updateProjectionMatrix()
     render()
   }
+  // Camera focus: { x, z, zoom } eased toward the selected pin, or back to the whole map.
+  const focus = { x: 0, z: 0.4, zoom: 1 }
+  const pinWorld = new THREE.Vector3()
+  let focusTween = null
+  const focusOn = (index) => {
+    const p = pins[index]
+    let to = { x: 0, z: 0.4, zoom: 1 }
+    if (p) {
+      p.pin.getWorldPosition(pinWorld)
+      to = { x: pinWorld.x, z: pinWorld.z, zoom: 0.55 }
+    }
+    focusTween?.kill()
+    focusTween = gsap.to(focus, {
+      ...to, duration: reduced ? 0 : 1.4, ease: 'power3.inOut',
+      onUpdate: () => { if (reduced || !running) render() },
+    })
+  }
+
   const placeCamera = () => {
     // The Kingdom is ~12 × 10 units; keep all of it (and the tallest pins) in frame.
     const narrow = camera.aspect < 1
-    const dist = narrow ? 25 : 21
-    camera.position.set(1.2 + state.px * 1.6, dist * 0.8 - state.py * 1, dist * 0.6)
+    const dist = (narrow ? 25 : 21) * focus.zoom
+    target.set(focus.x, 0, focus.z)
+    camera.position.set(focus.x + 1.2 * focus.zoom + state.px * 1.6, dist * 0.8 - state.py * 1, focus.z + dist * 0.6)
     camera.lookAt(target)
   }
 
@@ -180,6 +199,9 @@ export function mountMapScene(container, { outline, locations, labels = [], redu
       if (!el) return
       el.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`
       el.style.setProperty('--dy', `${dy}px`)
+      // Pins pushed off the map area (e.g. while zoomed in on a city) hide their label.
+      const inside = x > 10 && x < width - 10 && y > 24 && y < height - 4
+      el.style.opacity = inside ? '' : '0'
     })
   }
 
@@ -273,6 +295,11 @@ export function mountMapScene(container, { outline, locations, labels = [], redu
       revealed = true
       intro.play()
     },
+    /** Fly the camera to a location (index) or back to the whole Kingdom (-1). */
+    focus(index) {
+      state.highlight = index
+      focusOn(index)
+    },
     highlight(index) {
       state.highlight = index
       if (reduced) render()
@@ -280,6 +307,7 @@ export function mountMapScene(container, { outline, locations, labels = [], redu
     dispose() {
       pause()
       intro.kill()
+      focusTween?.kill()
       visibility.disconnect()
       resizeObserver.disconnect()
       container.removeEventListener('pointermove', onPointer)
