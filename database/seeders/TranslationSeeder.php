@@ -23,11 +23,22 @@ class TranslationSeeder extends Seeder
         }
 
         $existing = Translation::query()->where('locale', 'ar')->pluck('source_hash')->flip();
+        $now = now();
+        $rows = [];
 
         foreach (json_decode(File::get($file), true) ?: [] as $source => $text) {
-            if (! $existing->has(Translation::hash($source))) {
-                Translation::put('ar', $source, $text);
+            $source = trim($source);
+            $hash = Translation::hash($source);
+
+            if (! $existing->has($hash) && trim((string) $text) !== '') {
+                $existing[$hash] = true;
+                $rows[] = ['locale' => 'ar', 'source_hash' => $hash, 'source' => $source, 'text' => trim($text), 'created_at' => $now, 'updated_at' => $now];
             }
+        }
+
+        // One insert per 100 rows keeps first-start seeding fast (it runs on every new Vercel instance).
+        foreach (array_chunk($rows, 100) as $chunk) {
+            Translation::query()->insert($chunk);
         }
     }
 }

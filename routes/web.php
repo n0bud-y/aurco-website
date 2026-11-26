@@ -64,4 +64,14 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::delete('messages/{message}', [MessageController::class, 'destroy'])->name('messages.destroy');
 });
 
+// On Vercel uploads live in /tmp, outside the static files, so Laravel serves them.
+if (env('VERCEL')) {
+    Route::get('/storage/{path}', function (string $path) {
+        $file = storage_path('app/public/'.$path);
+        abort_unless(is_file($file) && ! str_contains($path, '..'), 404);
+
+        return response()->file($file);
+    })->where('path', '.*');
+}
+
 Route::fallback(fn () => Inertia::render('NotFound')->toResponse(request())->setStatusCode(404));
