@@ -146,6 +146,13 @@ export default {
   'Page not found': 'الصفحة غير موجودة',
   "That page doesn't exist or has moved. Head back to the home page or get in touch and we'll point you the right way.": 'هذه الصفحة غير موجودة أو تم نقلها. عد إلى الصفحة الرئيسية أو تواصل معنا وسنرشدك إلى ما تبحث عنه.',
 
+  // Home redesign
+  "Learn more": "اعرف المزيد",
+  "View all projects": "عرض جميع المشاريع",
+  "Testimonials": "آراء العملاء",
+  "Previous quote": "الاقتباس السابق",
+  "Next quote": "الاقتباس التالي",
+
   // Browser tab suffix
   'AURCO Contracting': 'أوركو للمقاولات',
 }

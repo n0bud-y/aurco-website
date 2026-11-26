@@ -207,7 +207,7 @@ return [
                 'values' => ['label' => 'Core values', 'type' => 'lines', 'help' => 'One per line: Value | short description'],
                 'presence_title' => ['label' => 'Regional presence — heading', 'type' => 'text'],
                 'presence_text' => ['label' => 'Regional presence — text', 'type' => 'textarea'],
-                'presence_locations' => ['label' => 'Locations', 'type' => 'lines', 'help' => 'One per line: City | note (e.g. Khobar | Head office)'],
+                'presence_locations' => ['label' => 'Locations', 'type' => 'lines', 'help' => 'One per line: City | note | latitude, longitude — e.g. Khobar | Head office | 26.28, 50.21. The first line is the head office; the coordinates place the pin on the 3D map.'],
                 'presence_image' => ['label' => 'Regional presence — map', 'type' => 'image'],
                 'why_title' => ['label' => 'Why choose AURCO — heading', 'type' => 'text'],
                 'why_text' => ['label' => 'Why choose AURCO — text', 'type' => 'textarea'],

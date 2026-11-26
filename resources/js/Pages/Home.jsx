@@ -5,6 +5,7 @@ import StatsStrip from '../components/StatsStrip'
 import Services from '../components/Services'
 import WhyChooseUs from '../components/WhyChooseUs'
 import Projects from '../components/Projects'
+import PresenceMap from '../components/PresenceMap'
 import Clients from '../components/Clients'
 import CtaBanner from '../components/CtaBanner'
 import Testimonials from '../components/Testimonials'
@@ -24,6 +25,7 @@ export default function Home() {
       <Services />
       <WhyChooseUs />
       <Projects />
+      <PresenceMap />
       <Clients />
       <CtaBanner />
       <Testimonials />

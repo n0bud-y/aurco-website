@@ -16,3 +16,16 @@
   .cta__text { margin-top: 18px; font-size: 16px; }
   .cta__button { margin-top: 28px; }
 }
+
+/* Moving hazard-stripe texture and a red glow behind the content */
+.cta::before {
+  content: ''; position: absolute; inset: -50% -10%; pointer-events: none; opacity: .07;
+  background: repeating-linear-gradient(-45deg, #fff 0 2px, transparent 2px 26px);
+  animation: ctaStripes 18s linear infinite;
+}
+.cta::after {
+  content: ''; position: absolute; left: -10%; bottom: -60%; width: 70%; height: 140%; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(200, 22, 30, .45), rgba(200, 22, 30, 0));
+}
+@keyframes ctaStripes { to { transform: translateX(37px); } }
+@media (prefers-reduced-motion: reduce) { .cta::before { animation: none; } }

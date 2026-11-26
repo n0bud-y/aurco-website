@@ -322,3 +322,24 @@ Schema      : migration 2026_11_25_000100_add_company_profile_fields.
 - The Arabic must be reviewed by a native Arabic speaker on the client side before launch
   (see doc/client-questions.txt, item 13).
 - Client question list written: doc/client-questions.txt.
+
+--------------------------------------------------------------------------------
+9. HOME PAGE REDESIGN — ANIMATION & 3D (2026-11-27)
+--------------------------------------------------------------------------------
+- PDF split into 3 parts by the user: compared all 69 pages with the original, no content change.
+- Decisions: 3D steel frame hero + 3D Saudi map, cinematic motion, theme colours unchanged,
+  home page first (other pages follow after client review).
+- Hero: three.js steel warehouse frame, pipe rack and lattice tower assemble after the loader,
+  camera orbits on scroll, follows the pointer; key figures along the bottom; photo fallback
+  without WebGL.
+- About: layered photo, red offset frame, floating "17+ years" badge, checklist rows.
+- Key figures: glow + blueprint grid, hover lines, ticker of industries and locations.
+- Services: expanding image panels with summary and capabilities.
+- Why choose AURCO: sticky heading, cards stack and shrink on scroll.
+- Projects: pinned horizontal reel with progress bar (swipe on phones).
+- NEW Regional presence: 3D map of the Kingdom with pins, arcs from Khobar HQ, hover list.
+  Coordinates are a third part of each location line in the CRM (City | note | lat, lng).
+- Clients: logo wall as six marquee rows (still one image in the CRM).
+- Testimonials: large auto-advancing quote slider.
+- CTA: moving stripe texture.
+- All of it supports Arabic (RTL), phones, and "reduced motion" (3D shows a still frame).

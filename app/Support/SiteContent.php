@@ -300,7 +300,14 @@ class SiteContent
             'presence' => [
                 'title' => $p['presence_title'] ?? null,
                 'text' => $p['presence_text'] ?? null,
-                'locations' => static::rows($p['presence_locations'] ?? [], ['name', 'note']),
+                'locations' => collect(static::rows($p['presence_locations'] ?? [], ['name', 'note', 'coords']))
+                    ->map(function (array $row, int $i) {
+                        // "26.28, 50.21" → lat / lng for the 3D map pin
+                        [$lat, $lng] = array_pad(array_map('floatval', explode(',', (string) $row['coords'])), 2, null);
+                        unset($row['coords']);
+
+                        return $row + ['lat' => $lat ?: null, 'lng' => $lng ?: null, 'hq' => $i === 0];
+                    })->values()->all(),
                 'image' => Media::url($p['presence_image'] ?? null),
             ],
             'why' => [

@@ -1,3 +1,66 @@
-.projects__deco { left: 0; bottom: 3px; width: 500px; }
-@media (min-width: 1440px) { .projects { --section-pad-bottom: 102px; } }
-@media (max-width: 1023px) { .projects__deco { width: 340px; } }
+.reel { overflow: hidden; background: linear-gradient(180deg, var(--c-pink-top) 0%, var(--c-pink-bottom) 100%); }
+/* Desktop: the section is pinned, so it must fit the screen. */
+@media (min-width: 1024px) {
+  /* top padding clears the sticky header while the section is pinned */
+  .reel { display: flex; flex-direction: column; justify-content: center; min-height: 100svh; padding-block: 118px 52px; }
+  .reel .reel-card { height: clamp(320px, 100svh - 420px, 560px); }
+}
+.reel__head { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px; align-items: end; margin-bottom: 52px; }
+.reel__head .eyebrow { margin-bottom: 16px; }
+.reel__text { font-size: 18px; line-height: 1.65; max-width: 520px; justify-self: end; }
+
+.reel__viewport { width: 100%; }
+.reel__track {
+  display: flex; gap: 28px; width: max-content;
+  padding-inline: max(var(--gutter), (100vw - 1280px) / 2);
+  will-change: transform;
+}
+.reel-card { flex: none; width: clamp(300px, 38vw, 560px); height: clamp(420px, 62vh, 600px); }
+.reel-card__link {
+  position: relative; isolation: isolate; display: block; height: 100%; overflow: hidden;
+  border-radius: var(--radius-card); background: var(--c-navy); color: #fff;
+}
+.reel-card__media { position: absolute; inset: 0; z-index: -2; overflow: hidden; }
+.reel-card__img { width: 116%; height: 100%; max-width: none; margin-inline-start: -8%; object-fit: cover; transition: scale .9s cubic-bezier(.2, .7, .2, 1); }
+.reel-card__link:hover .reel-card__img { scale: 1.06; }
+.reel-card__shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(8, 12, 22, .05) 35%, rgba(8, 12, 22, .9) 100%); }
+.reel-card__index {
+  position: absolute; top: 22px; inset-inline-end: 26px;
+  font: 800 76px/1 var(--font-head); letter-spacing: -.04em; color: transparent; -webkit-text-stroke: 1.5px rgba(255, 255, 255, .75);
+}
+.reel-card__tag {
+  position: absolute; top: 28px; inset-inline-start: 28px; padding: 8px 14px; border-radius: 999px;
+  background: rgba(255, 255, 255, .94); font: 700 12px/1 var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--c-accent);
+}
+.reel-card__body { position: absolute; inset-inline: 0; bottom: 0; padding: 0 30px 30px; }
+.reel-card__title { font: 700 clamp(22px, calc(12px + .9vw), 30px)/1.2 var(--font-head); }
+.reel-card__meta { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 12px; font-size: 15px; color: rgba(255, 255, 255, .82); }
+.reel-card__meta span { display: inline-flex; align-items: center; gap: 6px; }
+.reel-card__meta svg { width: 16px; height: 16px; }
+
+.reel-card--cta { width: clamp(260px, 24vw, 360px); }
+.reel-card--cta .reel-card__link {
+  display: flex; flex-direction: column; justify-content: flex-end; gap: 12px; padding: 34px;
+  background: var(--btn-gradient);
+}
+.reel-card__count { font: 800 clamp(80px, 9vw, 130px)/.9 var(--font-head); letter-spacing: -.05em; }
+.reel-card__cta-label { font: 700 24px/1.2 var(--font-head); }
+.reel-card__cta-icon { width: 46px; height: 46px; margin-top: 10px; transition: transform .4s ease; }
+.reel-card--cta .reel-card__link:hover .reel-card__cta-icon { transform: translateX(8px); }
+
+.reel__progress { height: 3px; margin-top: 44px; background: rgba(19, 31, 52, .12); border-radius: 3px; overflow: hidden; }
+.reel__progress span { display: block; height: 100%; background: var(--c-red); transform: scaleX(0); transform-origin: left; }
+
+/* Phones, tablets and reduced motion: a swipeable row */
+@media (max-width: 1023px) {
+  .reel__head { grid-template-columns: 1fr; gap: 16px; }
+  .reel__text { justify-self: start; font-size: 16px; }
+  .reel__viewport { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .reel__viewport::-webkit-scrollbar { display: none; }
+  .reel__track { padding-inline: var(--gutter); }
+  .reel-card { scroll-snap-align: start; width: min(82vw, 420px); height: 460px; }
+  .reel__progress { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reel__viewport { overflow-x: auto; }
+}
