@@ -109,3 +109,17 @@ IBM Plex Sans Arabic. Any page also opens in Arabic with `?lang=ar` (for example
 - For production: set `APP_ENV=production`, `APP_DEBUG=false` and a real `APP_URL`, run
   `npm run build` and `php artisan migrate --force`, then point your web server at `public/`.
   Switch `DB_CONNECTION` to MySQL in `.env` if you prefer it to SQLite.
+
+## Vercel (demo / staging)
+
+The repo deploys to Vercel as a review copy of the site. `vercel.json` runs `api/index.php`
+on the community PHP runtime and serves `public/build` and the seeded images as static files.
+
+- Vercel's file system is read-only and short-lived, so the SQLite database is rebuilt from the
+  seeders in `/tmp` whenever Vercel starts a new instance. **Changes made in the CRM on Vercel
+  do not last.** Use PHP hosting with a persistent disk (or MySQL) for the real site.
+- `public/build` is committed because Vercel does not run the front-end build here:
+  run `npm run build` before committing UI changes.
+- Optional environment variables in the Vercel project settings:
+  `APP_KEY` (from `php artisan key:generate --show`) and `ADMIN_PASSWORD`. Without
+  `ADMIN_PASSWORD` the CRM login on Vercel stays locked.
