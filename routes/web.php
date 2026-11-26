@@ -26,6 +26,8 @@ Route::get('/projects', [SiteController::class, 'projects'])->name('projects');
 Route::get('/credentials', [SiteController::class, 'credentials'])->name('credentials');
 Route::get('/gallery', [SiteController::class, 'gallery'])->name('gallery');
 Route::get('/contact', [SiteController::class, 'contact'])->name('contact');
+Route::get('/sitemap.xml', [SiteController::class, 'sitemap'])->name('sitemap');
+Route::get('/robots.txt', [SiteController::class, 'robots'])->name('robots');
 Route::get('/locale/{locale}', [SiteController::class, 'locale'])
     ->whereIn('locale', array_keys(\App\Support\Translator::LOCALES))
     ->name('locale');

@@ -15,6 +15,17 @@ use Illuminate\Support\Str;
 /** Everything the React front end renders, assembled from the CRM. */
 class SiteContent
 {
+    /** @var array<string, array> per-request cache of the translated payload */
+    private static array $localized = [];
+
+    /** The payload in the current language, built once per request (page props and meta tags share it). */
+    public static function localized(?string $locale = null): array
+    {
+        $locale ??= app()->getLocale();
+
+        return static::$localized[$locale] ??= Translator::translate(static::payload(), $locale);
+    }
+
     public static function payload(): array
     {
         $company = Setting::group('company');

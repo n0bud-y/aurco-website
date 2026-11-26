@@ -38,6 +38,8 @@ $default('APP_URL', 'https://'.($_SERVER['HTTP_X_FORWARDED_HOST'] ?? $_SERVER['H
 $default('APP_KEY', 'base64:'.base64_encode(hash('sha256', 'aurco-demo|'.(getenv('VERCEL_DEPLOYMENT_ID') ?: getenv('VERCEL_GIT_COMMIT_SHA') ?: getenv('VERCEL_URL') ?: ($_SERVER['HTTP_HOST'] ?? 'local')), true)));
 $default('ADMIN_PASSWORD', bin2hex(random_bytes(24)));
 $default('LOG_CHANNEL', 'stderr');
+// A staging copy should stay out of search results (noindex + robots.txt Disallow).
+$default('SEARCH_INDEXING', 'false');
 $default('SESSION_DRIVER', 'file');
 $default('CACHE_STORE', 'file');
 $default('DB_CONNECTION', 'sqlite');

@@ -21,7 +21,7 @@ class HandleInertiaRequests extends Middleware
 
         return array_merge(parent::share($request), [
             'locale' => $locale,
-            'content' => fn () => Translator::translate(SiteContent::payload(), $locale),
+            'content' => fn () => SiteContent::localized($locale),
             'flash' => [
                 'status' => fn () => $request->session()->get('status'),
             ],
