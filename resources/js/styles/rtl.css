@@ -99,3 +99,38 @@
   [dir='rtl'] .about__visual { padding: 0 0 28px 20px; }
   [dir='rtl'] .about__frame { inset: 24px 20px 0 0; }
 }
+
+/* ---- Inner page banner ---- */
+[dir='rtl'] .page-hero__media { inset: 0 auto 0 0; clip-path: polygon(0 0, 78% 0, 100% 100%, 0 100%); }
+[dir='rtl'] .page-hero__media::after { background: linear-gradient(270deg, rgba(11, 18, 32, .75) 0%, rgba(11, 18, 32, .15) 45%, rgba(11, 18, 32, .35) 100%); }
+[dir='rtl'] .page-hero__grid { -webkit-mask-image: linear-gradient(270deg, #000 0%, #000 45%, transparent 75%); mask-image: linear-gradient(270deg, #000 0%, #000 45%, transparent 75%); }
+[dir='rtl'] .page-hero__word { left: auto; right: 4%; }
+[dir='rtl'] .page-hero__bar { left: auto; right: 0; }
+
+/* ---- Inner pages redesign ---- */
+[dir='rtl'] .layered { padding: 0 0 40px 36px; }
+[dir='rtl'] .layered__frame { inset: 40px 36px 0 0; }
+[dir='rtl'] .layered__badge { left: auto; right: -24px; }
+[dir='rtl'] .info-card::after { transform-origin: right; }
+[dir='rtl'] .leader__portrait { padding: 0 0 28px 28px; }
+[dir='rtl'] .leader__frame { inset: 28px 28px 0 0; }
+@media (max-width: 767px) {
+  [dir='rtl'] .layered { padding: 0 0 28px 20px; }
+  [dir='rtl'] .layered__frame { inset: 24px 20px 0 0; }
+  [dir='rtl'] .layered__badge { right: -6px; }
+  [dir='rtl'] .leader__portrait { padding: 0 0 18px 18px; }
+  [dir='rtl'] .leader__frame { inset: 18px 18px 0 0; }
+}
+[dir='rtl'] .service-block__media { padding: 0 30px 30px 0; }
+[dir='rtl'] .split--reverse .service-block__media { padding: 0 0 30px 30px; }
+[dir='rtl'] .service-block__frame { inset: 30px 0 0 30px; }
+[dir='rtl'] .split--reverse .service-block__frame { inset: 30px 30px 0 0; }
+[dir='rtl'] .fleet-chart__bar { border-radius: 4px 0 0 4px; }
+@media (max-width: 767px) {
+  [dir='rtl'] .service-block__media, [dir='rtl'] .split--reverse .service-block__media { padding: 0 18px 18px 0; }
+  [dir='rtl'] .service-block__frame, [dir='rtl'] .split--reverse .service-block__frame { inset: 18px 0 0 18px; }
+}
+[dir='rtl'] .iso-list li:hover { transform: translateX(-6px); }
+[dir='rtl'] .digital-points li:hover { transform: translateX(-4px); }
+[dir='rtl'] .iso-images .frame-btn:hover { transform: perspective(900px) rotateY(5deg) translateY(-4px); }
+[dir='rtl'] .safety-chart__tick span { inset-inline-start: 0; }

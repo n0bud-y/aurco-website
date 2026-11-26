@@ -82,6 +82,9 @@ ul, ol { list-style: none; }
 }
 .filter-bar__btn:hover { border-color: var(--c-accent); color: var(--c-accent); }
 .filter-bar__btn[aria-pressed='true'] { background: var(--btn-gradient); border-color: transparent; color: #fff; }
+.filter-bar__btn { display: inline-flex; align-items: center; gap: 8px; }
+.filter-bar__count { min-width: 24px; padding: 4px 7px; border-radius: 999px; background: var(--c-pink-top); font: 700 12px/1 var(--font-head); color: var(--c-accent); }
+.filter-bar__btn[aria-pressed="true"] .filter-bar__count { background: rgba(255, 255, 255, .22); color: #fff; }
 
 /* Section heading */
 .eyebrow {

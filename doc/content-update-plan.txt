@@ -343,3 +343,22 @@ Schema      : migration 2026_11_25_000100_add_company_profile_fields.
 - Testimonials: large auto-advancing quote slider.
 - CTA: moving stripe texture.
 - All of it supports Arabic (RTL), phones, and "reduced motion" (3D shows a still frame).
+
+--------------------------------------------------------------------------------
+10. INNER PAGES REDESIGN (2026-11-27)
+--------------------------------------------------------------------------------
+- New banner on every inner page: navy card, project photo on a diagonal (wipe-in + parallax),
+  moving blueprint grid, large outlined title drifting on scroll.
+- About: layered intro photo with "17+ years" badge, framed leadership portraits, vision/mission
+  panels with icons, core values that fill red on hover, the 3D map (replaces the static image),
+  numbered "our difference" grid.
+- Services: sticky section bar with scrollspy, outlined numbers, framed parallax photos,
+  capability chips, animated fleet bar chart (units per type, share on hover).
+- Projects: GSAP Flip filtering with counts, track-record summary (projects + combined value),
+  rows cascade in per tab.
+- QHSE: sticky section bar, man-hours column chart with per-year incident tooltip and
+  "zero LTI / zero fatalities" highlight; hover polish on SDGs, certificates and cards.
+- Gallery: Flip filtering with counts, category tags and hover captions.
+- Contact: lifted cards with pulsing icons, framed map with address card and directions link.
+- Fixed: the "All" filter did nothing in Arabic on Projects and Gallery.
+- Checked: English + Arabic, 1440px and 390px (no sideways scroll), filters, no console errors.

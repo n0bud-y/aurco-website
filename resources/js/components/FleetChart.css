@@ -1,0 +1,37 @@
+.fleet-chart { padding: clamp(24px, 3vw, 40px); border-radius: var(--radius-card); background: #fff; border: 1px solid var(--c-border); box-shadow: 0 40px 80px -60px rgba(19, 31, 52, .5); }
+.fleet-chart__caption {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 20px;
+  padding-bottom: 18px; margin-bottom: 14px; border-bottom: 1px solid var(--c-border);
+  font: 700 18px/1.3 var(--font-head); color: var(--c-navy);
+}
+.fleet-chart__total { font: 500 14px/1.3 var(--font-body); color: var(--c-text); }
+.fleet-chart__rows { display: grid; gap: 2px; }
+.fleet-chart__row {
+  position: relative; display: grid; grid-template-columns: minmax(120px, 210px) minmax(0, 1fr); align-items: center; gap: 16px;
+  padding: 5px 8px; border-radius: 10px; transition: background-color .2s ease, opacity .2s ease;
+}
+.fleet-chart__row.is-hover { background: #f6f4f4; }
+.fleet-chart__row.is-dim { opacity: .55; }
+.fleet-chart__name { font-size: 14.5px; line-height: 1.3; color: var(--c-navy); }
+.fleet-chart__track { position: relative; display: flex; align-items: center; gap: 10px; height: 20px; }
+/* single series: one hue, thin bar, 4px rounded data end, square at the baseline */
+.fleet-chart__bar {
+  display: block; height: 16px; width: 0; border-radius: 0 4px 4px 0; background: var(--c-red);
+  transition: width 1.1s cubic-bezier(.2, .7, .2, 1) var(--d);
+}
+.fleet-chart.is-shown .fleet-chart__bar { width: calc(var(--w) - 40px); min-width: 4px; }
+.fleet-chart__value {
+  font: 700 14px/1 var(--font-head); color: var(--c-navy); font-variant-numeric: tabular-nums;
+  opacity: 0; transition: opacity .4s ease calc(var(--d) + .7s);
+}
+.fleet-chart.is-shown .fleet-chart__value { opacity: 1; }
+.fleet-chart__tip {
+  position: absolute; inset-inline-end: 8px; top: -32px; z-index: 2; padding: 6px 10px; border-radius: 8px; white-space: nowrap;
+  background: var(--c-navy); color: #fff; font: 600 12.5px/1.2 var(--font-body); pointer-events: none;
+}
+
+@media (max-width: 600px) {
+  .fleet-chart__row { grid-template-columns: 1fr; gap: 4px; padding: 6px 4px; }
+  .fleet-chart__name { font-size: 13.5px; }
+}
+@media (prefers-reduced-motion: reduce) { .fleet-chart__bar, .fleet-chart__value { transition: none; } }

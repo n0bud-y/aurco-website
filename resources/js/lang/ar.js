@@ -153,6 +153,18 @@ export default {
   "Previous quote": "الاقتباس السابق",
   "Next quote": "الاقتباس التالي",
 
+  // Inner pages redesign
+  "projects": "مشروعًا",
+  "SAR {value}M": "{value} مليون ريال",
+  "combined value (approx.)": "قيمة إجمالية تقريبية",
+  "Units by equipment type": "عدد الوحدات حسب نوع المعدات",
+  "{count} units in total": "الإجمالي: {count} وحدة",
+  "{count} units · {share}% of the fleet": "{count} وحدة · {share}% من الأسطول",
+
+  "Get directions": "احصل على الاتجاهات",
+  "Man-hours worked per year": "ساعات العمل المنجزة سنويًا",
+  "man-hours worked, {from}–{to}": "ساعة عمل منجزة، {from}–{to}",
+
   // Browser tab suffix
   'AURCO Contracting': 'أوركو للمقاولات',
 }

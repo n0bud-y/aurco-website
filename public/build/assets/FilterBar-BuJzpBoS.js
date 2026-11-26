@@ -1,1 +1,0 @@
-import{T as e}from"./NavLink-BwjOCyZ-.js";var t=e();function n({options:e,value:n,onChange:r,label:i}){return(0,t.jsx)(`div`,{className:`filter-bar`,role:`group`,"aria-label":i,children:e.map(e=>(0,t.jsx)(`button`,{type:`button`,className:`filter-bar__btn`,"aria-pressed":n===e,onClick:()=>r(e),children:e},e))})}export{n as t};

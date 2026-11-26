@@ -12,12 +12,13 @@ const icons = { phone: PhoneRing, mail: MailAt, map: MapPin }
 
 export default function Contact() {
   const t = useT()
-  const { company, contactPage } = useContent()
+  const { company, contactPage, projectsPage } = useContent()
+  const directions = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(contactPage.mapQuery ?? '')}`
 
   return (
     <>
       <Head title={t("Contact Us")} />
-      <PageHero title={contactPage.hero.title} text={contactPage.hero.text} crumb={t("Contact")} />
+      <PageHero title={contactPage.hero.title} text={contactPage.hero.text} crumb={t("Contact")} image={projectsPage?.items?.[3]?.image} />
 
       <section className="contact-info section" aria-label={t("How to reach us")}>
         <div className="container contact-info__grid">
@@ -43,6 +44,12 @@ export default function Contact() {
         <div className="container">
           <SectionHeading id="map-title" eyebrow={t("Find us")} title={t("Visit our office")} text={company.address} />
           <div className="contact-map__frame" data-reveal="zoom">
+            <div className="contact-map__card">
+              <span className="contact-map__pin" aria-hidden="true"><MapPin /></span>
+              <p className="contact-map__name">{company.name}</p>
+              <address className="contact-map__address">{company.address}</address>
+              <a className="contact-map__link" href={directions} target="_blank" rel="noopener noreferrer">{t("Get directions")}</a>
+            </div>
             <iframe
               title={t("Map showing the AURCO Contracting office in Al Khobar")}
               src={`https://www.google.com/maps?q=${encodeURIComponent(contactPage.mapQuery ?? '')}&output=embed`}

@@ -1,4 +1,8 @@
-import { useState } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
+import { gsap } from 'gsap'
+import { Flip } from 'gsap/Flip'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { prefersReducedMotion } from '../motion/config'
 import { Head } from '@inertiajs/react'
 import { useContent } from '../content/useContent'
 import PageHero from '../components/PageHero'
@@ -8,6 +12,8 @@ import FilterBar from '../components/ui/FilterBar'
 import { MapPin } from '../components/ui/Icons'
 import '../styles/inner.css'
 import './Projects.css'
+
+gsap.registerPlugin(Flip, ScrollTrigger)
 import { useT } from '../lib/i18n'
 
 function ProjectCard({ item, revealDelay }) {
@@ -41,12 +47,30 @@ function ProjectCard({ item, revealDelay }) {
   )
 }
 
+/** Sum of "SAR 241M" / "241 مليون ريال" style values (all figures are in millions). */
+function totalValue(rows) {
+  return rows.reduce((sum, row) => {
+    const n = parseFloat(String(row.value ?? '').replace(/[^\d.]/g, ''))
+    return Number.isFinite(n) ? sum + n : sum
+  }, 0)
+}
+
 function TrackRecord({ sections }) {
   const t = useT()
   const [active, setActive] = useState(sections[0]?.label)
+  const bodyRef = useRef(null)
   const section = sections.find((s) => s.label === active) ?? sections[0]
+
+  // Rows cascade in whenever the table changes.
+  useLayoutEffect(() => {
+    if (prefersReducedMotion() || !bodyRef.current) return undefined
+    const tween = gsap.fromTo(bodyRef.current.children, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.025, ease: 'power2.out' })
+    return () => tween.kill()
+  }, [active])
+
   if (!section) return null
   const showValue = section.rows.some((r) => r.value)
+  const total = totalValue(section.rows)
 
   return (
     <section className="section section--pink track" id="track-record" aria-labelledby="track-title">
@@ -58,6 +82,10 @@ function TrackRecord({ sections }) {
           text={t("A wider list of construction, temporary facilities, facility management and equipment rental contracts. Values are approximate.")}
         />
         <FilterBar options={sections.map((s) => s.label)} value={section.label} onChange={setActive} label={t("Choose a track record table")} />
+        <div className="track__summary" aria-live="polite">
+          <span className="track__stat"><strong>{section.rows.length}</strong> {t('projects')}</span>
+          {total > 0 && <span className="track__stat"><strong>{t('SAR {value}M', { value: Math.round(total).toLocaleString('en') })}</strong> {t('combined value (approx.)')}</span>}
+        </div>
         <div className="data-table-wrap">
           <table className="data-table data-table--stack">
             <caption className="visually-hidden">{section.label}</caption>
@@ -71,9 +99,9 @@ function TrackRecord({ sections }) {
                 {showValue && <th scope="col">{t("Value (approx.)")}</th>}
               </tr>
             </thead>
-            <tbody>
+            <tbody ref={bodyRef}>
               {section.rows.map((row, i) => (
-                <tr key={`${row.title}-${i}`}>
+                <tr key={`${section.key}-${i}`}>
                   <td className="data-table__title">{row.title}</td>
                   <td data-label={t("Client")}>{row.client}</td>
                   <td data-label={t("Location")}>{row.location}</td>
@@ -93,15 +121,40 @@ function TrackRecord({ sections }) {
 export default function Projects() {
   const t = useT()
   const { projectsPage } = useContent()
-  const [filter, setFilter] = useState('All')
-  const items = filter === 'All'
-    ? projectsPage.items
-    : projectsPage.items.filter((item) => item.category === filter)
+  const allLabel = projectsPage.filters[0] // "All" in the current language
+  const [filter, setFilter] = useState(allLabel)
+  const gridRef = useRef(null)
+  const flipState = useRef(null)
+  const shown = (item) => filter === allLabel || item.category === filter
+  const count = projectsPage.items.filter(shown).length
+  const counts = { [allLabel]: projectsPage.items.length }
+  projectsPage.items.forEach((item) => { counts[item.category] = (counts[item.category] ?? 0) + 1 })
+
+  const choose = (next) => {
+    if (gridRef.current && !prefersReducedMotion()) flipState.current = Flip.getState(gridRef.current.children)
+    setFilter(next)
+  }
+
+  // Cards glide to their new places; leaving and entering cards fade and scale.
+  useLayoutEffect(() => {
+    const state = flipState.current
+    if (!state) return
+    flipState.current = null
+    Flip.from(state, {
+      duration: 0.7,
+      ease: 'power3.inOut',
+      stagger: 0.03,
+      absolute: true,
+      onEnter: (els) => gsap.fromTo(els, { opacity: 0, scale: 0.88 }, { opacity: 1, scale: 1, duration: 0.6, delay: 0.15 }),
+      onLeave: (els) => gsap.to(els, { opacity: 0, scale: 0.88, duration: 0.4 }),
+      onComplete: () => ScrollTrigger.refresh(),
+    })
+  }, [filter])
 
   return (
     <>
       <Head title={t("Projects")} />
-      <PageHero title={projectsPage.hero.title} text={projectsPage.hero.text} crumb={t("Projects")} />
+      <PageHero title={projectsPage.hero.title} text={projectsPage.hero.text} crumb={t("Projects")} image={projectsPage.items[2]?.image ?? projectsPage.items[0]?.image} />
 
       <section className="portfolio section" aria-labelledby="portfolio-title">
         <div className="container">
@@ -111,11 +164,11 @@ export default function Projects() {
             title={projectsPage.title}
             text={projectsPage.text}
           />
-          <FilterBar options={projectsPage.filters} value={filter} onChange={setFilter} label={t("Filter projects by type")} />
-          <p className="visually-hidden" role="status">{t('{count} projects shown', { count: items.length })}</p>
-          <ul className="portfolio__grid">
-            {items.map((item, i) => (
-              <li key={item.title}>
+          <FilterBar options={projectsPage.filters} value={filter} onChange={choose} label={t("Filter projects by type")} counts={counts} />
+          <p className="visually-hidden" role="status">{t('{count} projects shown', { count })}</p>
+          <ul className="portfolio__grid" ref={gridRef}>
+            {projectsPage.items.map((item, i) => (
+              <li key={item.title} data-flip-id={item.title} className={shown(item) ? undefined : 'is-filtered'}>
                 <ProjectCard item={item} revealDelay={(i % 3) * 90} />
               </li>
             ))}

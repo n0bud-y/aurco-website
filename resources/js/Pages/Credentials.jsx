@@ -5,6 +5,8 @@ import PageHero from '../components/PageHero'
 import CtaBanner from '../components/CtaBanner'
 import Lightbox from '../components/Lightbox'
 import SectionHeading from '../components/ui/SectionHeading'
+import SectionNav from '../components/ui/SectionNav'
+import SafetyChart from '../components/SafetyChart'
 import '../styles/inner.css'
 import './Credentials.css'
 import { useT } from '../lib/i18n'
@@ -50,7 +52,7 @@ function SafetyTable({ stats }) {
 
 export default function Credentials() {
   const t = useT()
-  const { credentialsPage: page } = useContent()
+  const { credentialsPage: page, about } = useContent()
   const [viewer, setViewer] = useState({ items: [], index: -1 })
   const open = (items, index) => setViewer({ items, index })
 
@@ -60,13 +62,11 @@ export default function Credentials() {
   return (
     <>
       <Head title={t("QHSE & Credentials")} />
-      <PageHero title={page.hero.title} text={page.hero.text} crumb={t("QHSE & Credentials")}>
-        <nav className="cred-jump" aria-label={t("On this page")}>
-          {[['hse', 'HSE'], ['certifications', 'Certifications'], ['quality', 'Quality'], ['sustainability', 'Sustainability'], ['registrations', 'Registrations'], ['recognition', 'Recognition']].map(([id, label]) => (
-            <a key={id} href={`#${id}`}>{t(label)}</a>
-          ))}
-        </nav>
-      </PageHero>
+      <PageHero title={page.hero.title} text={page.hero.text} crumb={t("QHSE & Credentials")} image={about?.image} />
+      <SectionNav
+        label={t("On this page")}
+        items={[['hse', 'HSE'], ['certifications', 'Certifications'], ['quality', 'Quality'], ['sustainability', 'Sustainability'], ['registrations', 'Registrations'], ['recognition', 'Recognition']].map(([id, label]) => ({ id, label: t(label) }))}
+      />
 
       <section className="section" id="hse" aria-labelledby="hse-title">
         <div className="container">
@@ -80,6 +80,7 @@ export default function Credentials() {
             ))}
           </ul>
           <h3 className="sub-heading" data-reveal="up">{t("Annual safety statistics record")}</h3>
+          <SafetyChart stats={page.hse.stats} />
           <SafetyTable stats={page.hse.stats} />
         </div>
       </section>

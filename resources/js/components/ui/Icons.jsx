@@ -93,6 +93,23 @@ export const CloseIcon = (props) => (
   </svg>
 )
 
+export const EyeIcon = (props) => (
+  <svg viewBox="0 0 48 48" {...stroke} strokeWidth={1.6} {...props}>
+    <path d="M3 24s7.5-13 21-13 21 13 21 13-7.5 13-21 13S3 24 3 24Z" />
+    <circle cx="24" cy="24" r="7.5" />
+    <circle cx="24" cy="24" r="2.5" />
+  </svg>
+)
+
+export const TargetIcon = (props) => (
+  <svg viewBox="0 0 48 48" {...stroke} strokeWidth={1.6} {...props}>
+    <circle cx="22" cy="26" r="17" />
+    <circle cx="22" cy="26" r="10.5" />
+    <circle cx="22" cy="26" r="4" />
+    <path d="M22 26 40 8M34 8h6v6" />
+  </svg>
+)
+
 /* Feature icons for the "Why choose us" cards */
 const hand = (
   <>
