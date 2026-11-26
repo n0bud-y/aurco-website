@@ -21,6 +21,7 @@ database/*.sqlite
 
 # Large source files kept outside version control
 /app.zip
+*.zip
 /doc/*.pdf
 
 # Tooling
