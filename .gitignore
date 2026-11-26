@@ -28,3 +28,6 @@ database/*.sqlite
 .phpunit.result.cache
 .DS_Store
 Thumbs.db
+
+# Editor settings
+/.vscode
