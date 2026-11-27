@@ -79,7 +79,7 @@ export default function PresenceMap() {
     const next = selected === i ? -1 : i
     setSelected(next)
     setActive(next)
-    apiRef.current?.focus(next)
+    apiRef.current?.highlight(next)
   }
   const place = selected > -1 ? locations[selected] : null
   const placeWork = selected > -1 ? work[selected] : []

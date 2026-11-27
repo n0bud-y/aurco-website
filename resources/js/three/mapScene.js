@@ -147,30 +147,13 @@ export function mountMapScene(container, { outline, locations, labels = [], redu
     camera.updateProjectionMatrix()
     render()
   }
-  // Camera focus: { x, z, zoom } eased toward the selected pin, or back to the whole map.
-  const focus = { x: 0, z: 0.4, zoom: 1 }
-  const pinWorld = new THREE.Vector3()
-  let focusTween = null
-  const focusOn = (index) => {
-    const p = pins[index]
-    let to = { x: 0, z: 0.4, zoom: 1 }
-    if (p) {
-      p.pin.getWorldPosition(pinWorld)
-      to = { x: pinWorld.x, z: pinWorld.z, zoom: 0.55 }
-    }
-    focusTween?.kill()
-    focusTween = gsap.to(focus, {
-      ...to, duration: reduced ? 0 : 1.4, ease: 'power3.inOut',
-      onUpdate: () => { if (reduced || !running) render() },
-    })
-  }
-
   const placeCamera = () => {
     // The Kingdom is ~12 × 10 units; keep all of it (and the tallest pins) in frame.
+    // The camera always shows the whole map — selecting a city only highlights its pin.
     const narrow = camera.aspect < 1
-    const dist = (narrow ? 25 : 21) * focus.zoom
-    target.set(focus.x, 0, focus.z)
-    camera.position.set(focus.x + 1.2 * focus.zoom + state.px * 1.6, dist * 0.8 - state.py * 1, focus.z + dist * 0.6)
+    const dist = narrow ? 25 : 21
+    target.set(0, 0, 0.4)
+    camera.position.set(1.2 + state.px * 1.6, dist * 0.8 - state.py * 1, 0.4 + dist * 0.6)
     camera.lookAt(target)
   }
 
@@ -295,11 +278,7 @@ export function mountMapScene(container, { outline, locations, labels = [], redu
       revealed = true
       intro.play()
     },
-    /** Fly the camera to a location (index) or back to the whole Kingdom (-1). */
-    focus(index) {
-      state.highlight = index
-      focusOn(index)
-    },
+    /** Emphasise one location's pin and label (-1 for none). */
     highlight(index) {
       state.highlight = index
       if (reduced) render()
@@ -307,7 +286,6 @@ export function mountMapScene(container, { outline, locations, labels = [], redu
     dispose() {
       pause()
       intro.kill()
-      focusTween?.kill()
       visibility.disconnect()
       resizeObserver.disconnect()
       container.removeEventListener('pointermove', onPointer)
